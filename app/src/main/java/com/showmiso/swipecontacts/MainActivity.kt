@@ -8,13 +8,24 @@ import android.app.Activity
 import android.content.Intent
 import android.provider.ContactsContract
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.showmiso.swipecontacts.model.Contact
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private val contactsList = ArrayList<Contact>()
+    private lateinit var contactAdapter: ContactAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initUI()
+        checkPermission()
+    }
+
+    private fun initUI() {
+        contactAdapter = ContactAdapter()
+        list_contact.adapter = contactAdapter
+        list_contact.layoutManager = LinearLayoutManager(this)
     }
 
     private val onClickListener = View.OnClickListener {
@@ -30,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             checkSelfPermission(strPermission[1]) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(strPermission, Constants.REQUEST_CODE_PERMISSION)
         } else {
-
+            getAllContacts()
         }
     }
 
@@ -45,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         )
         val cursor = contentResolver.query(uri, projection,
             null, null, null)
+        val contactsList = ArrayList<Contact>()
 
         if (cursor!!.moveToFirst()) {
             do {
@@ -63,7 +75,7 @@ class MainActivity : AppCompatActivity() {
                 contactsList.add(contact)
             } while (cursor.moveToNext())
         }
-
+        contactAdapter.updateContact(contactsList)
         cursor.close()
     }
 
@@ -71,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == Constants.REQUEST_CODE_PERMISSION) {
-
+                getAllContacts()
             }
         }
     }
