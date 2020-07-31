@@ -7,5 +7,5 @@ data class Contact(
     val phone: String,
     val email: String? = "",
     val deleted: Boolean = false
-    ) {
+) {
 }

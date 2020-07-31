@@ -61,13 +61,13 @@ class MainActivity : AppCompatActivity() {
         if (cursor!!.moveToFirst()) {
             do {
                 val Id = cursor.getLong(0)
-                val thumbnailId = cursor.getLong(1)
+                val thumbnailImage = cursor.getLong(1)
                 val fullName = cursor.getString(3)
                 val phoneNumber = cursor.getString(2)
                 val email = cursor.getString(4)
                 val contact = Contact(
                     Id,
-                    thumbnailId,
+                    thumbnailImage,
                     fullName,
                     phoneNumber,
                     email
@@ -79,11 +79,19 @@ class MainActivity : AppCompatActivity() {
         cursor.close()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == Constants.REQUEST_CODE_PERMISSION) {
-                getAllContacts()
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == Constants.REQUEST_CODE_PERMISSION) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
+                    getAllContacts()
+                } else {
+                    // 연락처 허용 거부
+                }
             }
         }
     }

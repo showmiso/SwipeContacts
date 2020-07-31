@@ -5,16 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.showmiso.swipecontacts.model.Contact
+import kotlinx.android.synthetic.main.view_contact_info.view.*
 
-class ContactAdapter (
-
-) : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
+class ContactAdapter : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
     private var contactsList = ArrayList<Contact>()
 
     class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(contact: Contact) {
-//            txt_name.text = contact.name
-//            txt_phone.text = contact.phone
+            itemView.txt_name.text = contact.name
+            itemView.txt_phone.text = contact.phone
         }
     }
 
