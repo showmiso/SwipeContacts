@@ -1,36 +1,31 @@
 package com.showmiso.swipecontacts
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.showmiso.swipecontacts.model.Contact
 import kotlinx.android.synthetic.main.view_contact_card.view.*
+import kotlinx.android.synthetic.main.view_contact_card.view.txt_name
+import kotlinx.android.synthetic.main.view_contact_card.view.txt_phone
+import kotlinx.android.synthetic.main.view_trash_item.view.*
 
-class ContactAdapter(
-    private val layoutId: Int
-) : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
+class TrashAdapter : RecyclerView.Adapter<TrashAdapter.TrashViewHolder>() {
     private var contactsList = ArrayList<Contact>()
 
-    class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class TrashViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(contact: Contact) {
             itemView.txt_name.text = contact.name
             itemView.txt_phone.text = contact.phone
-            itemView.txt_email.text = contact.email
-
-            if (contact.thumbnail != null) {
-                Log.d("TAG", "TEST")
-            }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
-        return ContactViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrashViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.view_trash_item, parent, false)
+        return TrashViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TrashViewHolder, position: Int) {
         val contact = contactsList[position]
         holder.bind(contact)
     }
