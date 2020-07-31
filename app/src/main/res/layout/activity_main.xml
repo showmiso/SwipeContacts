@@ -6,11 +6,74 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_contact"
+    <com.yuyakaido.android.cardstackview.CardStackView
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="match_parent"
         />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btn_setting"
+        android:layout_width="@dimen/normal_icon_size"
+        android:layout_height="@dimen/normal_icon_size"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/basic_margin"
+        android:layout_marginStart="@dimen/basic_margin"
+        android:src="@drawable/ic_setting"
+        android:tint="@color/colorGray"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btn_delete"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/bg_circle"
+        android:src="@drawable/ic_close"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btn_skip"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/bg_circle"
+        android:src="@drawable/ic_check"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btn_restore"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/bg_circle"
+        android:src="@drawable/ic_restore"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_trash"
+        android:layout_width="100dp"
+        android:layout_height="75dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="100dp"
+        android:background="@color/colorGray"
+        >
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:src="@drawable/ic_delete"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

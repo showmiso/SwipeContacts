@@ -10,6 +10,9 @@ import android.provider.ContactsContract
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.showmiso.swipecontacts.model.Contact
+import com.yuyakaido.android.cardstackview.CardStackLayoutManager
+import com.yuyakaido.android.cardstackview.CardStackListener
+import com.yuyakaido.android.cardstackview.Direction
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -24,14 +27,66 @@ class MainActivity : AppCompatActivity() {
 
     private fun initUI() {
         contactAdapter = ContactAdapter()
-        list_contact.adapter = contactAdapter
-        list_contact.layoutManager = LinearLayoutManager(this)
+        card_view.layoutManager = CardStackLayoutManager(this, onCardStackListener)
+        card_view.adapter = contactAdapter
+
+        btn_setting.setOnClickListener(onClickListener)
+        btn_delete.setOnClickListener(onClickListener)
+        btn_skip.setOnClickListener(onClickListener)
+        btn_restore.setOnClickListener(onClickListener)
+        layout_trash.setOnClickListener(onClickListener)
     }
 
     private val onClickListener = View.OnClickListener {
         when (it.id) {
+            R.id.btn_setting -> {
+                startActivity(Intent(this@MainActivity, SettingActivity::class.java))
+            }
+            R.id.btn_delete -> {
 
+            }
+            R.id.btn_skip -> {
+
+            }
+            R.id.btn_restore -> {
+
+            }
+            R.id.layout_trash -> {
+                startActivity(Intent(this@MainActivity, TrashActivity::class.java))
+            }
         }
+    }
+
+    private val onCardStackListener = object : CardStackListener {
+        override fun onCardDisappeared(view: View?, position: Int) {
+        }
+
+        override fun onCardDragging(direction: Direction?, ratio: Float) {
+        }
+
+        override fun onCardSwiped(direction: Direction?) {
+        }
+
+        override fun onCardCanceled() {
+        }
+
+        override fun onCardAppeared(view: View?, position: Int) {
+        }
+
+        override fun onCardRewound() {
+        }
+    }
+
+    private fun deleteContact() {
+
+    }
+
+    private fun skipContact() {
+
+    }
+
+    private fun restoreContact() {
+
     }
 
     private fun checkPermission() {
@@ -94,18 +149,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    private fun removeContact() {
-
-    }
-
-    private fun saveContact() {
-
-    }
-
-    private fun restoreContact() {
-
     }
 
 

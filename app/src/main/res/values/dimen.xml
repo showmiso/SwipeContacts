@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="normal_icon_size">35dp</dimen>
+    <dimen name="basic_margin">26dp</dimen>
+    <dimen name="radius_rect">25dp</dimen>
+</resources>
