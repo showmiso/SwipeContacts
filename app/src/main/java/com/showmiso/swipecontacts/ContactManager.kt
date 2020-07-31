@@ -8,7 +8,6 @@ import android.provider.ContactsContract
 import com.showmiso.swipecontacts.model.Contact
 import java.io.ByteArrayInputStream
 import java.io.InputStream
-import java.net.URI
 
 class ContactManager(
     private val context: Context
@@ -25,7 +24,6 @@ class ContactManager(
         val cursor = context.contentResolver.query(uri, projection,
             null, null, null)
         val contactsList = ArrayList<Contact>()
-
         if (cursor!!.moveToFirst()) {
             do {
                 val Id = cursor.getLong(0)
@@ -33,6 +31,10 @@ class ContactManager(
                 val thumbnailId = cursor.getLong(2)
                 val phoneNumber = cursor.getString(3)
                 val email = cursor.getString(4)
+
+                if (fullName == "박미소") {
+                    val thumbnailUri = openPhoto(thumbnailId)
+                }
 
                 val contact = Contact(
                     Id,
@@ -50,18 +52,68 @@ class ContactManager(
         return contactsList
     }
 
+    /**
+     * TODO.
+     * Email 경로 확인
+     * 이미지 썸네일 말고 큰 이미지로 불러올 것
+     * 
+     */
+    fun getAllInfo(): ArrayList<Contact> {
+        val projection = arrayOf(
+            ContactsContract.Contacts._ID,
+            ContactsContract.Contacts.DISPLAY_NAME,
+            ContactsContract.CommonDataKinds.Phone.NUMBER,
+            ContactsContract.Contacts.PHOTO_ID
+        )
+        val contactsList = ArrayList<Contact>()
+        val cursor = context.contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+        projection, null, null, null)
+        while (cursor!!.moveToNext()) {
+            val contactId = cursor.getLong(cursor.getColumnIndex(ContactsContract.Contacts._ID))
+            val fullName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
+            val phoneNumber = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+            // get email
+            val section = ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = " + contactId
+            val cursorEmail = context.contentResolver.query(
+                ContactsContract.CommonDataKinds.Email.CONTENT_URI,
+                null, section, null, null
+            )
+            var email: String = ""
+            while (cursorEmail!!.moveToNext()) {
+                email = cursorEmail.getString(cursorEmail.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA))
+            }
+            cursorEmail.close()
+            // get thumbnail
+            val contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactId)
+            val photoUri = Uri.withAppendedPath(contactUri, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY)
+
+            if (fullName == "박미소") {
+                val thumbnailUri = openPhoto(0)
+            }
+
+            val contact = Contact(
+                contactId,
+                0,
+                fullName,
+                phoneNumber,
+                email,
+                photoUri
+            )
+            contactsList.add(contact)
+        }
+        contactsList.shuffle()
+        cursor.close()
+
+        return contactsList
+    }
+
     fun openPhoto(contactId: Long): InputStream? {
-        val contactUri =
-            ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactId)
-        val photoUri =
-            Uri.withAppendedPath(contactUri, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY)
+        val contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactId)
+        val photoUri = Uri.withAppendedPath(contactUri, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY)
         val cursor: Cursor = context.contentResolver.query(
             photoUri,
-            arrayOf<String>(ContactsContract.Contacts.Photo.PHOTO),
-            null,
-            null,
-            null
-        )
+            arrayOf(ContactsContract.Contacts.Photo.PHOTO),
+            null, null, null)
             ?: return null
         try {
             if (cursor.moveToFirst()) {

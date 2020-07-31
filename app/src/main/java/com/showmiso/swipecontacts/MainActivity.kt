@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         btn_delete.setOnClickListener(onClickListener)
         btn_skip.setOnClickListener(onClickListener)
         btn_restore.setOnClickListener(onClickListener)
-        layout_trash.setOnClickListener(onClickListener)
+        btn_trash.setOnClickListener(onClickListener)
     }
 
     private val onClickListener = View.OnClickListener {
@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
                 manager.setRewindAnimationSetting(setting)
                 card_view.rewind()
             }
-            R.id.layout_trash -> {
+            R.id.btn_trash -> {
                 startActivity(Intent(this@MainActivity, TrashActivity::class.java))
             }
         }
@@ -111,6 +111,9 @@ class MainActivity : AppCompatActivity() {
         if (contact != null) {
             TrashActivity.deleteList.add(contact)
             Toast.makeText(applicationContext, "delete", Toast.LENGTH_SHORT).show()
+            if (TrashActivity.deleteList.size > 0) {
+                btn_trash.visibility = View.VISIBLE
+            }
         }
     }
 
@@ -136,7 +139,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getAllContacts() {
-        contactAdapter.updateContact(contactManager.getAllContacts())
+//        contactManager.getAllInfo()
+
+        contactAdapter.updateContact(contactManager.getAllInfo())
     }
 
     override fun onRequestPermissionsResult(

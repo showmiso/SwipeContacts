@@ -19,6 +19,7 @@ class ContactAdapter(
             itemView.txt_phone.text = contact.phone
             itemView.txt_email.text = contact.email
 
+            itemView.img_thumbnail.setImageURI(contact.uri)
             if (contact.thumbnail != null) {
                 Log.d("TAG", "TEST")
             }
