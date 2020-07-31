@@ -17,7 +17,6 @@ import com.showmiso.swipecontacts.model.Contact
 import com.yuyakaido.android.cardstackview.*
 import kotlinx.android.synthetic.main.activity_main.*
 
-
 class MainActivity : AppCompatActivity() {
     private val contactAdapter by lazy { ContactAdapter(R.layout.view_contact_card) }
     private val manager by lazy { CardStackLayoutManager(this, onCardStackListener) }
@@ -139,8 +138,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getAllContacts() {
-//        contactManager.getAllInfo()
-
         contactAdapter.updateContact(contactManager.getAllInfo())
     }
 

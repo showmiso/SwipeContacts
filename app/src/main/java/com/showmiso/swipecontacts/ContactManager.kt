@@ -9,6 +9,7 @@ import com.showmiso.swipecontacts.model.Contact
 import java.io.ByteArrayInputStream
 import java.io.InputStream
 
+
 class ContactManager(
     private val context: Context
 ) {
@@ -58,31 +59,52 @@ class ContactManager(
      * 이미지 썸네일 말고 큰 이미지로 불러올 것
      * 
      */
+
     fun getAllInfo(): ArrayList<Contact> {
         val projection = arrayOf(
             ContactsContract.Contacts._ID,
             ContactsContract.Contacts.DISPLAY_NAME,
-            ContactsContract.CommonDataKinds.Phone.NUMBER,
-            ContactsContract.Contacts.PHOTO_ID
+            ContactsContract.Contacts.PHOTO_ID,
+            ContactsContract.Data.MIMETYPE,
+            ContactsContract.CommonDataKinds.Email.ADDRESS,
+            ContactsContract.CommonDataKinds.Phone.NUMBER
         )
         val contactsList = ArrayList<Contact>()
+        val emailList = ArrayList<String>()
         val cursor = context.contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
         projection, null, null, null)
         while (cursor!!.moveToNext()) {
             val contactId = cursor.getLong(cursor.getColumnIndex(ContactsContract.Contacts._ID))
             val fullName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
             val phoneNumber = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+
             // get email
-            val section = ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = " + contactId
-            val cursorEmail = context.contentResolver.query(
-                ContactsContract.CommonDataKinds.Email.CONTENT_URI,
-                null, section, null, null
-            )
+            val selection = ContactsContract.CommonDataKinds.Email.CONTACT_ID + "=?"
+            val selectionArgs2 =
+                arrayOf(ContactsContract.Contacts._ID)
+            val cursor2 = context.contentResolver.query(
+                ContactsContract.Data.CONTENT_URI, projection, selection, selectionArgs2, null);
             var email: String = ""
-            while (cursorEmail!!.moveToNext()) {
-                email = cursorEmail.getString(cursorEmail.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA))
+            while (cursor2!!.moveToNext()) {
+                email = cursor2.getString(cursor2.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA))
+                if (email == "") continue
+                emailList.add(email)
             }
-            cursorEmail.close()
+            cursor2.close()
+
+//            val section = ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = ?"
+//            val selectionArgs = arrayOf(contactId.toString())
+//            val cursorEmail = context.contentResolver.query(
+//                ContactsContract.CommonDataKinds.Email.CONTENT_URI,
+//                null, section, selectionArgs, null
+//            )
+//            var email: String = ""
+//            while (cursorEmail!!.moveToNext()) {
+//                email = cursorEmail.getString(cursorEmail.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA))
+//                if (email == "") continue
+//                emailList.add(email)
+//            }
+//            cursorEmail.close()
             // get thumbnail
             val contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactId)
             val photoUri = Uri.withAppendedPath(contactUri, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY)
