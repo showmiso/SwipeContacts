@@ -1,19 +1,14 @@
 package com.showmiso.swipecontacts
 
 import android.Manifest
-import android.content.ContentUris
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.database.Cursor
-import android.net.Uri
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.showmiso.swipecontacts.model.Contact
 import com.yuyakaido.android.cardstackview.*
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -109,7 +104,7 @@ class MainActivity : AppCompatActivity() {
         val contact = contactAdapter.deleteContact(skipCount)
         if (contact != null) {
             TrashActivity.deleteList.add(contact)
-            Toast.makeText(applicationContext, "delete", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(applicationContext, "delete", Toast.LENGTH_SHORT).show()
             if (TrashActivity.deleteList.size > 0) {
                 btn_trash.visibility = View.VISIBLE
             }
@@ -118,12 +113,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun skipCard() {
         skipCount += 1
-        Toast.makeText(applicationContext, "skip $skipCount", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(applicationContext, "skip $skipCount", Toast.LENGTH_SHORT).show()
     }
 
     private fun restoreCard() {
         skipCount -= 1
-        Toast.makeText(applicationContext, "restore $skipCount", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(applicationContext, "restore $skipCount", Toast.LENGTH_SHORT).show()
     }
 
     private fun checkPermission() {
@@ -138,7 +133,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getAllContacts() {
-        contactAdapter.updateContact(contactManager.getAllInfo())
+//        contactManager.getAllContacts()
+        contactAdapter.updateContact(contactManager.getInfo2())
+
+        Toast.makeText(this@MainActivity, "${contactAdapter.itemCount} 개 연락처를 가져왔습니다.", Toast.LENGTH_SHORT).show()
     }
 
     override fun onRequestPermissionsResult(

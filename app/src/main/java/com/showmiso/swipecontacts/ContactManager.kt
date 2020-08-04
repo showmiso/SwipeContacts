@@ -2,181 +2,110 @@ package com.showmiso.swipecontacts
 
 import android.content.ContentUris
 import android.content.Context
-import android.database.Cursor
 import android.net.Uri
 import android.provider.ContactsContract
 import com.showmiso.swipecontacts.model.Contact
-import java.io.ByteArrayInputStream
-import java.io.InputStream
-
 
 class ContactManager(
     private val context: Context
 ) {
-    fun getAllContacts(): ArrayList<Contact> {
-        val uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
+    fun getInfo2(): ArrayList<Contact> {
+        val contactsList = ArrayList<Contact>()
+        val cr = context.contentResolver
+        val displayName = ContactsContract.Contacts.DISPLAY_NAME_PRIMARY
+        val filter = "$displayName NOT LIKE '%@%'"
+        val order = String.format("%1\$s COLLATE NOCASE", displayName)
         val projection = arrayOf(
             ContactsContract.Contacts._ID,
-            ContactsContract.Contacts.DISPLAY_NAME,
-            ContactsContract.Contacts.PHOTO_ID,
-            ContactsContract.CommonDataKinds.Phone.NUMBER,
-            ContactsContract.CommonDataKinds.Email.ADDRESS
+            displayName,
+            ContactsContract.Contacts.HAS_PHONE_NUMBER
         )
-        val cursor = context.contentResolver.query(uri, projection,
-            null, null, null)
-        val contactsList = ArrayList<Contact>()
-        if (cursor!!.moveToFirst()) {
+        val cursor = cr.query(
+            ContactsContract.Contacts.CONTENT_URI,
+            projection,
+            filter,
+            null,
+            order
+        )
+
+        if (cursor != null && cursor.moveToFirst()) {
             do {
-                val Id = cursor.getLong(0)
-                val fullName = cursor.getString(1)
-                val thumbnailId = cursor.getLong(2)
-                val phoneNumber = cursor.getString(3)
-                val email = cursor.getString(4)
+                // get the contact's information
+                val id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID))
+                val name = cursor.getString(cursor.getColumnIndex(displayName))
+                val hasPhone = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))
 
-                if (fullName == "박미소") {
-                    val thumbnailUri = openPhoto(thumbnailId)
-                }
-
-                val contact = Contact(
-                    Id,
-                    thumbnailId,
-                    fullName,
-                    phoneNumber,
-                    email
+                // get the user's email address
+                var email: String = ""
+                val ce = cr.query(
+                    ContactsContract.CommonDataKinds.Email.CONTENT_URI,
+                    null,
+                    ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = ?",
+                    arrayOf(id),
+                    null
                 )
-                contactsList.add(contact)
-            } while (cursor.moveToNext())
-        }
-        contactsList.shuffle()
-        cursor.close()
-
-        return contactsList
-    }
-
-    /**
-     * TODO.
-     * Email 경로 확인
-     * 이미지 썸네일 말고 큰 이미지로 불러올 것
-     * 
-     */
-
-    fun getAllInfo(): ArrayList<Contact> {
-        val projection = arrayOf(
-            ContactsContract.Contacts._ID,
-            ContactsContract.Contacts.DISPLAY_NAME,
-            ContactsContract.Contacts.PHOTO_ID,
-            ContactsContract.Data.MIMETYPE,
-            ContactsContract.CommonDataKinds.Email.ADDRESS,
-            ContactsContract.CommonDataKinds.Phone.NUMBER
-        )
-        val contactsList = ArrayList<Contact>()
-        val emailList = ArrayList<String>()
-        val cursor = context.contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-        projection, null, null, null)
-        while (cursor!!.moveToNext()) {
-            val contactId = cursor.getLong(cursor.getColumnIndex(ContactsContract.Contacts._ID))
-            val fullName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
-            val phoneNumber = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
-
-            // get email
-            val selection = ContactsContract.CommonDataKinds.Email.CONTACT_ID + "=?"
-            val selectionArgs2 =
-                arrayOf(ContactsContract.Contacts._ID)
-            val cursor2 = context.contentResolver.query(
-                ContactsContract.Data.CONTENT_URI, projection, selection, selectionArgs2, null);
-            var email: String = ""
-            while (cursor2!!.moveToNext()) {
-                email = cursor2.getString(cursor2.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA))
-                if (email == "") continue
-                emailList.add(email)
-            }
-            cursor2.close()
-
-//            val section = ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = ?"
-//            val selectionArgs = arrayOf(contactId.toString())
-//            val cursorEmail = context.contentResolver.query(
-//                ContactsContract.CommonDataKinds.Email.CONTENT_URI,
-//                null, section, selectionArgs, null
-//            )
-//            var email: String = ""
-//            while (cursorEmail!!.moveToNext()) {
-//                email = cursorEmail.getString(cursorEmail.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA))
-//                if (email == "") continue
-//                emailList.add(email)
-//            }
-//            cursorEmail.close()
-            // get thumbnail
-            val contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactId)
-            val photoUri = Uri.withAppendedPath(contactUri, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY)
-
-            if (fullName == "박미소") {
-                val thumbnailUri = openPhoto(0)
-            }
-
-            val contact = Contact(
-                contactId,
-                0,
-                fullName,
-                phoneNumber,
-                email,
-                photoUri
-            )
-            contactsList.add(contact)
-        }
-        contactsList.shuffle()
-        cursor.close()
-
-        return contactsList
-    }
-
-    fun openPhoto(contactId: Long): InputStream? {
-        val contactUri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, contactId)
-        val photoUri = Uri.withAppendedPath(contactUri, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY)
-        val cursor: Cursor = context.contentResolver.query(
-            photoUri,
-            arrayOf(ContactsContract.Contacts.Photo.PHOTO),
-            null, null, null)
-            ?: return null
-        try {
-            if (cursor.moveToFirst()) {
-                val data = cursor.getBlob(0)
-                if (data != null) {
-                    return ByteArrayInputStream(data)
+                if (ce != null && ce.moveToFirst()) {
+                    email = ce.getString(ce.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA))
+                    ce.close()
                 }
-            }
-        } finally {
-            cursor.close()
-        }
-        return null
-    }
 
-    private fun getPhotoUriFromID(id: String): Uri? {
-        try {
-            val cur: Cursor? = context.contentResolver
-                .query(
+                // get the user's phone number
+                var phone: String = ""
+                if (hasPhone > 0) {
+                    val cp = cr.query(
+                        ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                        null,
+                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
+                        arrayOf(id),
+                        null
+                    )
+                    if (cp != null && cp.moveToFirst()) {
+                        phone =
+                            cp.getString(cp.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+                        cp.close()
+                    }
+                }
+
+                // get the user's photo
+                var uri: Uri? = null
+                val su = ContactsContract.Data.CONTACT_ID + "=" + id + " AND " +
+                        ContactsContract.Data.MIMETYPE + "='" +
+                        ContactsContract.CommonDataKinds.Photo.CONTENT_ITEM_TYPE + "'"
+                val cu = cr.query(
                     ContactsContract.Data.CONTENT_URI,
                     null,
-                    ContactsContract.Data.CONTACT_ID + "=" + id + " AND "
-                            + ContactsContract.Data.MIMETYPE + "='" + ContactsContract.CommonDataKinds.Photo.CONTENT_ITEM_TYPE
-                            + "'", null, null
+                    su,
+                    null,
+                    null
                 )
-            if (cur != null) {
-                if (!cur.moveToFirst()) {
-                    return null // no photo
+                if (cu != null && cu.moveToFirst())  {
+                    val person = ContentUris.withAppendedId(
+                        ContactsContract.Contacts.CONTENT_URI, id.toLong()
+                    )
+                    uri = Uri.withAppendedPath(
+                        person,
+                        ContactsContract.Contacts.Photo.CONTENT_DIRECTORY
+                    )
+                    cu.close()
                 }
-            } else {
-                return null // error in cursor process
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            return null
+
+                if (phone.isNotEmpty()) {
+                    val contact = Contact(
+                        0,
+                        0,
+                        name,
+                        phone,
+                        email,
+                        uri
+                    )
+                    contactsList.add(contact)
+                }
+            } while (cursor.moveToNext())
+
+            // clean up cursor
+            cursor.close()
         }
-        val person: Uri = ContentUris.withAppendedId(
-            ContactsContract.Contacts.CONTENT_URI, id.toLong()
-        )
-        return Uri.withAppendedPath(
-            person,
-            ContactsContract.Contacts.Photo.CONTENT_DIRECTORY
-        )
+
+        return contactsList
     }
 }
