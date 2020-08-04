@@ -2,13 +2,52 @@ package com.showmiso.swipecontacts
 
 import android.content.ContentUris
 import android.content.Context
+import android.database.Cursor
 import android.net.Uri
 import android.provider.ContactsContract
 import com.showmiso.swipecontacts.model.Contact
+import io.reactivex.Observable
+import java.util.concurrent.Callable
 
 class ContactManager(
     private val context: Context
 ) {
+
+//    fun getInfoObservable(): Observable<ArrayList<Contact>> {
+//        val contactsList = ArrayList<Contact>()
+//        val cr = context.contentResolver
+//        val displayName = ContactsContract.Contacts.DISPLAY_NAME_PRIMARY
+//        val filter = "$displayName NOT LIKE '%@%'"
+//        val order = String.format("%1\$s COLLATE NOCASE", displayName)
+//        val projection = arrayOf(
+//            ContactsContract.Contacts._ID,
+//            displayName,
+//            ContactsContract.Contacts.HAS_PHONE_NUMBER
+//        )
+//        val cc = cr.query(
+//            ContactsContract.Contacts.CONTENT_URI,
+//            projection,
+//            filter,
+//            null,
+//            order
+//        )
+//
+//        val result = Observable.just(cc)
+//            .map {
+//                cursor ->
+//                val id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID))
+//                val name = cursor.getString(cursor.getColumnIndex(displayName))
+//                val hasPhone = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))
+//                val contact = Contact(id, name, hasPhone > 0)
+//                contact
+//            }
+//            .map {
+//                if (it.hasPhone) {
+//
+//                }
+//            }
+//    }
+
     fun getInfo2(): ArrayList<Contact> {
         val contactsList = ArrayList<Contact>()
         val cr = context.contentResolver
@@ -88,17 +127,18 @@ class ContactManager(
                     cu.close()
                 }
 
-                if (phone.isNotEmpty()) {
+//                if (phone.isNotEmpty()) {
                     val contact = Contact(
-                        0,
-                        0,
+                        // TODO. 함수 수정중
+                        id,
                         name,
+                        true,
                         phone,
                         email,
                         uri
                     )
                     contactsList.add(contact)
-                }
+//                }
             } while (cursor.moveToNext())
 
             // clean up cursor
