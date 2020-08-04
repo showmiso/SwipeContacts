@@ -1,10 +1,13 @@
 package com.showmiso.swipecontacts
 
+import android.graphics.drawable.ShapeDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.showmiso.swipecontacts.model.Contact
 import kotlinx.android.synthetic.main.view_contact_card.view.*
 
@@ -19,10 +22,33 @@ class ContactAdapter(
             itemView.txt_phone.text = contact.phone
             itemView.txt_email.text = contact.email
 
-            itemView.img_thumbnail.setImageURI(contact.uri)
-            if (contact.thumbnail != null) {
-                Log.d("TAG", "TEST")
+            val randomColor = DrawableManager.randomColor()
+            if (contact.uri == null) {
+//                val drawable = DrawableManager.changeDrawableSolidColor(
+//                    itemView.context,
+//                    R.drawable.bg_circle)
+//                Glide.with(itemView.context)
+//                    .load(drawable)
+//                    .circleCrop()
+//                    .centerCrop()
+//                    .into(itemView.img_thumbnail)
+
+
+//                val sd: ShapeDrawable = itemView.img_thumbnail.background as ShapeDrawable
+//                sd.paint.color = itemView.context.getColor(R.color.colorRed)
+
+                itemView.img_thumbnail.background.setTint(
+                    itemView.context.getColor(randomColor[1]))
+
+            } else {
+                Glide.with(itemView.context)
+                    .load(contact.uri)
+                    .circleCrop()
+                    .centerCrop()
+                    .into(itemView.img_thumbnail)
             }
+
+            itemView.layout_card.background.setTint(itemView.context.getColor(randomColor[0]))
         }
     }
 

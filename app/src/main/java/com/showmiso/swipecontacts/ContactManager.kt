@@ -27,7 +27,6 @@ class ContactManager(
             null,
             order
         )
-
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 // get the contact's information
