@@ -1,52 +1,143 @@
 package com.showmiso.swipecontacts
 
+import android.content.ContentResolver
 import android.content.ContentUris
 import android.content.Context
-import android.database.Cursor
 import android.net.Uri
 import android.provider.ContactsContract
 import com.showmiso.swipecontacts.model.Contact
 import io.reactivex.Observable
-import java.util.concurrent.Callable
+import io.reactivex.functions.BiFunction
+import io.reactivex.functions.Function3
+import io.reactivex.schedulers.Schedulers
 
 class ContactManager(
     private val context: Context
 ) {
+    private val cr: ContentResolver = context.contentResolver
 
-//    fun getInfoObservable(): Observable<ArrayList<Contact>> {
-//        val contactsList = ArrayList<Contact>()
-//        val cr = context.contentResolver
-//        val displayName = ContactsContract.Contacts.DISPLAY_NAME_PRIMARY
-//        val filter = "$displayName NOT LIKE '%@%'"
-//        val order = String.format("%1\$s COLLATE NOCASE", displayName)
-//        val projection = arrayOf(
-//            ContactsContract.Contacts._ID,
-//            displayName,
-//            ContactsContract.Contacts.HAS_PHONE_NUMBER
-//        )
-//        val cc = cr.query(
-//            ContactsContract.Contacts.CONTENT_URI,
-//            projection,
-//            filter,
-//            null,
-//            order
-//        )
-//
-//        val result = Observable.just(cc)
-//            .map {
-//                cursor ->
-//                val id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID))
-//                val name = cursor.getString(cursor.getColumnIndex(displayName))
-//                val hasPhone = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))
-//                val contact = Contact(id, name, hasPhone > 0)
-//                contact
-//            }
-//            .map {
-//                if (it.hasPhone) {
-//
-//                }
-//            }
-//    }
+    fun getInfoObservable(): Observable<ArrayList<Contact>> {
+        val displayName = ContactsContract.Contacts.DISPLAY_NAME_PRIMARY
+        val filter = "$displayName NOT LIKE '%@%'"
+        val order = String.format("%1\$s COLLATE NOCASE", displayName)
+        val projection = arrayOf(
+            ContactsContract.Contacts._ID,
+            displayName,
+            ContactsContract.Contacts.HAS_PHONE_NUMBER
+        )
+        val contactsList = ArrayList<Contact>()
+        return Observable.just(
+            cr.query(
+                ContactsContract.Contacts.CONTENT_URI,
+                projection,
+                filter,
+                null,
+                order
+            )
+        )
+            .flatMap { cursor ->
+                cursor.moveToFirst()
+                val id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID))
+                val name = cursor.getString(cursor.getColumnIndex(displayName))
+                val hasPhone = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))
+                val contact = Contact(id, name, hasPhone > 0)
+                getContactInfoOfPhoneEmailUri(contact)
+            }
+            .map {
+                contactsList.add(it)
+                contactsList
+            }
+            .subscribeOn(Schedulers.io())
+    }
+
+    private fun getContactInfoOfPhoneEmailUri(contact: Contact): Observable<Contact> {
+        val id = contact.id
+        val phoneCursorObservable = Observable.just(
+            cr.query(
+                ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                null,
+                ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
+                arrayOf(id),
+                null
+            )
+        )
+            .map { cp ->
+                cp.moveToFirst()
+                val phone =
+                    cp.getString(cp.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+                cp.close()
+                phone
+            }
+            .onErrorReturn {
+                ""
+            }
+            .subscribeOn(Schedulers.io())
+
+        val emailCursorObservable = Observable.just(
+            cr.query(
+                ContactsContract.CommonDataKinds.Email.CONTENT_URI,
+                null,
+                ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = ?",
+                arrayOf(id),
+                null
+            )
+        )
+            .map { ce ->
+                ce.moveToFirst()
+                val email =
+                    ce.getString(ce.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA))
+                ce.close()
+                email
+            }
+            .onErrorReturn {
+                ""
+            }
+            .subscribeOn(Schedulers.io())
+
+        val uriCursorObservable: Observable<Uri?> = Observable.just(
+            cr.query(
+                ContactsContract.Data.CONTENT_URI,
+                null,
+                ContactsContract.Data.CONTACT_ID + "=" + id + " AND " +
+                        ContactsContract.Data.MIMETYPE + "='" +
+                        ContactsContract.CommonDataKinds.Photo.CONTENT_ITEM_TYPE + "'",
+                null,
+                null
+            )
+        )
+            .map { cu ->
+                cu.moveToFirst()
+                val person = ContentUris.withAppendedId(
+                    ContactsContract.Contacts.CONTENT_URI, id.toLong()
+                )
+                val uri = Uri.withAppendedPath(
+                    person,
+                    ContactsContract.Contacts.Photo.CONTENT_DIRECTORY
+                )
+                cu.close()
+                uri
+            }
+            .onErrorReturn {
+                null
+            }
+            .subscribeOn(Schedulers.io())
+
+        val resultFunction3 = Function3<String, String, Uri?, Contact> {
+                resultPhone, resultEmail, resultUri ->
+            contact.phone = resultPhone
+            contact.email = resultEmail
+            contact.uri = resultUri
+            contact
+        }
+
+        return Observable.zip(
+            phoneCursorObservable,
+            emailCursorObservable,
+            uriCursorObservable,
+            resultFunction3
+        )
+            .subscribeOn(Schedulers.io())
+    }
 
     fun getInfo2(): ArrayList<Contact> {
         val contactsList = ArrayList<Contact>()
@@ -71,7 +162,8 @@ class ContactManager(
                 // get the contact's information
                 val id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID))
                 val name = cursor.getString(cursor.getColumnIndex(displayName))
-                val hasPhone = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))
+                val hasPhone =
+                    cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))
 
                 // get the user's email address
                 var email: String = ""
@@ -83,7 +175,8 @@ class ContactManager(
                     null
                 )
                 if (ce != null && ce.moveToFirst()) {
-                    email = ce.getString(ce.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA))
+                    email =
+                        ce.getString(ce.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA))
                     ce.close()
                 }
 
@@ -116,7 +209,7 @@ class ContactManager(
                     null,
                     null
                 )
-                if (cu != null && cu.moveToFirst())  {
+                if (cu != null && cu.moveToFirst()) {
                     val person = ContentUris.withAppendedId(
                         ContactsContract.Contacts.CONTENT_URI, id.toLong()
                     )
@@ -128,16 +221,15 @@ class ContactManager(
                 }
 
 //                if (phone.isNotEmpty()) {
-                    val contact = Contact(
-                        // TODO. 함수 수정중
-                        id,
-                        name,
-                        true,
-                        phone,
-                        email,
-                        uri
-                    )
-                    contactsList.add(contact)
+                val contact = Contact(
+                    // TODO. 함수 수정중
+                    id,
+                    name,
+                    phone,
+                    email,
+                    uri
+                )
+                contactsList.add(contact)
 //                }
             } while (cursor.moveToNext())
 

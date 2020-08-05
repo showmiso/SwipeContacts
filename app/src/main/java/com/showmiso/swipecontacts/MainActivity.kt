@@ -4,12 +4,15 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.yuyakaido.android.cardstackview.*
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -17,12 +20,18 @@ class MainActivity : AppCompatActivity() {
     private val manager by lazy { CardStackLayoutManager(this, onCardStackListener) }
     private var skipCount: Int = 0
     private val contactManager by lazy { ContactManager(this) }
+    private val disposables = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initUI()
         checkPermission()
+    }
+
+    override fun onDestroy() {
+        disposables.clear()
+        super.onDestroy()
     }
 
     private fun initUI() {
@@ -133,8 +142,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getAllContacts() {
-//        contactManager.getAllContacts()
-        contactAdapter.updateContact(contactManager.getInfo2())
+//        contactAdapter.updateContact(contactManager.getInfo2())
+
+        contactManager.getInfoObservable()
+            .subscribe(
+                {
+                    contactAdapter.updateContact(it)
+                }, {
+                    Log.d("TAG", "error " + it.localizedMessage)
+                }
+            )
+            .addTo(disposables)
 
         Toast.makeText(this@MainActivity, "${contactAdapter.itemCount} 개 연락처를 가져왔습니다.", Toast.LENGTH_SHORT).show()
     }
