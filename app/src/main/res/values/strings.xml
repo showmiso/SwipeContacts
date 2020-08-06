@@ -13,4 +13,5 @@
     <string name="setting_title">SETTING</string>
     <string name="setting_done">DONE</string>
     <string name="setting_message">지금까지 삭제한 연락처</string>
+    <string name="setting_license">OPENSOURCE LICENSE</string>
 </resources>

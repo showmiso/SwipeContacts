@@ -159,7 +159,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkPermission() {
         val strPermission =
-            arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.READ_CONTACTS)
+            arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS)
         if (checkSelfPermission(strPermission[0]) != PackageManager.PERMISSION_GRANTED &&
             checkSelfPermission(strPermission[1]) != PackageManager.PERMISSION_GRANTED
         ) {
@@ -185,7 +185,7 @@ class MainActivity : AppCompatActivity() {
                 if (grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
                     getAllContacts()
                 } else {
-                    // 연락처 허용 거부
+                    // TODO: 퍼미션 거부시 설정에서 퍼미션 허용해 달라는 화면을 띄울 것
                 }
             }
         }
