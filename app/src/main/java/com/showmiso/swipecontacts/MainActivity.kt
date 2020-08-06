@@ -142,10 +142,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getAllContacts() {
-//        contactManager.getContactAll {
-//            contactAdapter.updateContact(it)
-//            Toast.makeText(this@MainActivity, "${contactAdapter.itemCount} 개 연락처를 가져왔습니다.", Toast.LENGTH_SHORT).show()
-//        }
         contactManager.getContactAll(contactAdapter)
     }
 
