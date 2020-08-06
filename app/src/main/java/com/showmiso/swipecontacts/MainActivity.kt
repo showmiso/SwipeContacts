@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     private val contactAdapter by lazy { ContactAdapter(R.layout.view_contact_card) }
     private val manager by lazy { CardStackLayoutManager(this, onCardStackListener) }
     private var skipCount: Int = 0
-    private val contactManager by lazy {
+    private val contactPresenter by lazy {
         ContactPresenter(
             this
         )
@@ -28,11 +28,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         initUI()
         checkPermission()
-        contactManager.onCreate()
+        contactPresenter.onCreate()
     }
 
     override fun onDestroy() {
-        contactManager.onDestroy()
+        contactPresenter.onDestroy()
         super.onDestroy()
     }
 
@@ -145,7 +145,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getAllContacts() {
-        contactManager.getContactAll(contactAdapter)
+        contactPresenter.getContactAll(contactAdapter)
     }
 
     override fun onRequestPermissionsResult(

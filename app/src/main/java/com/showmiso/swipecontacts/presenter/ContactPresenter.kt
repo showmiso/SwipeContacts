@@ -23,11 +23,18 @@ class ContactPresenter(
     private val disposables = CompositeDisposable()
     private val UPDATE_SIZE = 10
 
-    override fun onCreate() {
-    }
+    override fun onCreate() {}
 
     override fun onDestroy() {
         disposables.clear()
+    }
+
+    fun deleteContact(contact: Contact) {
+
+    }
+
+    fun deleteContactList(contactList: ArrayList<Contact>) {
+
     }
 
     fun getContactAll(contactAdapter: ContactAdapter) {

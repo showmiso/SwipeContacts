@@ -34,7 +34,7 @@
         android:layout_marginTop="@dimen/basic_margin"
         android:layout_marginEnd="@dimen/basic_margin"
         android:src="@drawable/ic_setting"
-        android:tint="@color/colorGray"
+        android:tint="@color/colorBlack"
         />
 
     <androidx.appcompat.widget.AppCompatImageView

@@ -1,9 +1,10 @@
-package com.showmiso.swipecontacts
+package com.showmiso.swipecontacts.utils
 
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.ShapeDrawable
 import androidx.core.content.ContextCompat
+import com.showmiso.swipecontacts.R
 import kotlin.random.Random
 
 class DrawableManager {
@@ -11,7 +12,8 @@ class DrawableManager {
     companion object {
         fun changeDrawableSolidColor(context: Context, drawableId: Int): Drawable {
             val target = context.getDrawable(drawableId)
-            val colors = randomColor()
+            val colors =
+                randomColor()
 
 //            if (target is ShapeDrawable) {
             val shapeDrawable: ShapeDrawable = target as ShapeDrawable
