@@ -1,4 +1,4 @@
-package com.showmiso.swipecontacts
+package com.showmiso.swipecontacts.presenter
 
 import android.content.ContentResolver
 import android.content.ContentUris
@@ -7,6 +7,7 @@ import android.net.Uri
 import android.provider.ContactsContract
 import android.util.Log
 import android.widget.Toast
+import com.showmiso.swipecontacts.ContactAdapter
 import com.showmiso.swipecontacts.model.Contact
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -14,9 +15,8 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Function3
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
-import kotlin.coroutines.coroutineContext
 
-class ContactManager(
+class ContactPresenter(
     private val context: Context
 ) : Presenter {
     private val cr: ContentResolver = context.contentResolver
@@ -78,6 +78,7 @@ class ContactManager(
                         .map {
                             contactsList.add(it)
                             if (contactsList.size > UPDATE_SIZE) {
+                                contactsList.shuffle()
                                 contactAdapter.addList(contactsList)
                                 Log.d("getInfoObservable", "contactAdapter SIZE : ${contactAdapter.itemCount}")
                                 contactsList.clear()

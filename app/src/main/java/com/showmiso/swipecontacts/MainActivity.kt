@@ -4,22 +4,24 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.showmiso.swipecontacts.presenter.ContactPresenter
+import com.showmiso.swipecontacts.utils.Constants
 import com.yuyakaido.android.cardstackview.*
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private val contactAdapter by lazy { ContactAdapter(R.layout.view_contact_card) }
     private val manager by lazy { CardStackLayoutManager(this, onCardStackListener) }
     private var skipCount: Int = 0
-    private val contactManager by lazy { ContactManager(this) }
+    private val contactManager by lazy {
+        ContactPresenter(
+            this
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -134,7 +136,8 @@ class MainActivity : AppCompatActivity() {
         val strPermission =
             arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.READ_CONTACTS)
         if (checkSelfPermission(strPermission[0]) != PackageManager.PERMISSION_GRANTED &&
-            checkSelfPermission(strPermission[1]) != PackageManager.PERMISSION_GRANTED) {
+            checkSelfPermission(strPermission[1]) != PackageManager.PERMISSION_GRANTED
+        ) {
             requestPermissions(strPermission, Constants.REQUEST_CODE_PERMISSION)
         } else {
             getAllContacts()
@@ -161,6 +164,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-
 }

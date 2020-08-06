@@ -6,9 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.showmiso.swipecontacts.model.Contact
 import kotlinx.android.synthetic.main.view_contact_card.view.*
-import kotlinx.android.synthetic.main.view_contact_card.view.txt_name
-import kotlinx.android.synthetic.main.view_contact_card.view.txt_phone
-import kotlinx.android.synthetic.main.view_trash_item.view.*
 
 class TrashAdapter : RecyclerView.Adapter<TrashAdapter.TrashViewHolder>() {
     private var contactsList = ArrayList<Contact>()
@@ -21,7 +18,8 @@ class TrashAdapter : RecyclerView.Adapter<TrashAdapter.TrashViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrashViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.view_trash_item, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.view_trash_item, parent, false)
         return TrashViewHolder(view)
     }
 

@@ -1,13 +1,10 @@
 package com.showmiso.swipecontacts
 
-import android.graphics.drawable.ShapeDrawable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.showmiso.swipecontacts.model.Contact
 import kotlinx.android.synthetic.main.view_contact_card.view.*
 
@@ -38,7 +35,8 @@ class ContactAdapter(
 //                sd.paint.color = itemView.context.getColor(R.color.colorRed)
 
                 itemView.img_thumbnail.background.setTint(
-                    itemView.context.getColor(randomColor[1]))
+                    itemView.context.getColor(randomColor[1])
+                )
 
             } else {
                 Glide.with(itemView.context)

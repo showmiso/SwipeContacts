@@ -1,4 +1,4 @@
-package com.showmiso.swipecontacts
+package com.showmiso.swipecontacts.presenter
 
 interface Presenter {
     fun onCreate()
