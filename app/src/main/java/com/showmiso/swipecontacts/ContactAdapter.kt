@@ -80,6 +80,11 @@ class ContactAdapter(
         notifyDataSetChanged()
     }
 
+    fun clear() {
+        contactsList.clear()
+        notifyDataSetChanged()
+    }
+
     fun addList(list: ArrayList<Contact>) {
         val beforeSize = contactsList.size
         contactsList.addAll(list)

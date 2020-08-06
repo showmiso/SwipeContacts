@@ -28,7 +28,8 @@ class TrashAdapter(
                 }
                 R.id.btn_delete -> {
                     // 연락처에서 삭제
-//                    listener.onDeleteItem()
+                    val contact: Contact = itemView.tag as Contact
+                    listener.onDeleteItem(contact)
                 }
             }
         }
@@ -42,6 +43,7 @@ class TrashAdapter(
 
     override fun onBindViewHolder(holder: TrashViewHolder, position: Int) {
         val contact = contactsList[position]
+        holder.itemView.tag = contact
         holder.bind(contact)
     }
 

@@ -15,6 +15,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Function3
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
+import org.jetbrains.annotations.Contract
 
 class ContactPresenter(
     private val context: Context
@@ -30,7 +31,25 @@ class ContactPresenter(
     }
 
     fun deleteContact(contact: Contact) {
+        val cursor = cr.query(
+            ContactsContract.Contacts.CONTENT_URI,
+            null,
+            ContactsContract.Contacts._ID + "=" + contact.id,
+            null,
+            null
+        )
 
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                val lookupKey = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY))
+                val uri = Uri.withAppendedPath(
+                    ContactsContract.Contacts.CONTENT_LOOKUP_URI,
+                    lookupKey
+                )
+                cr.delete(uri, ContactsContract.Contacts._ID + "=" + contact.id, null)
+            } while (cursor.moveToNext())
+            cursor.close()
+        }
     }
 
     fun deleteContactList(contactList: ArrayList<Contact>) {
@@ -38,7 +57,7 @@ class ContactPresenter(
     }
 
     fun getContactAll(contactAdapter: ContactAdapter) {
-        getInfoObservable(contactAdapter)
+        getContactObservable(contactAdapter)
             .observeOn(AndroidSchedulers.mainThread())
             .map {
                 contactAdapter.addList(it)
@@ -53,7 +72,7 @@ class ContactPresenter(
             .addTo(disposables)
     }
 
-    private fun getInfoObservable(contactAdapter: ContactAdapter): Observable<ArrayList<Contact>> {
+    private fun getContactObservable(contactAdapter: ContactAdapter): Observable<ArrayList<Contact>> {
         val displayName = ContactsContract.Contacts.DISPLAY_NAME_PRIMARY
         val filter = "$displayName NOT LIKE '%@%'"
         val order = String.format("%1\$s COLLATE NOCASE", displayName)
@@ -80,7 +99,7 @@ class ContactPresenter(
                     val hasPhone =
                         cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))
                     val contact = Contact(id, name, hasPhone > 0)
-                    getContactInfoOfPhoneEmailUri(contact)
+                    getContactOfPhoneEmailUriObservable(contact)
                         .observeOn(AndroidSchedulers.mainThread())
                         .map {
                             contactsList.add(it)
@@ -101,7 +120,7 @@ class ContactPresenter(
             .subscribeOn(Schedulers.io())
     }
 
-    private fun getContactInfoOfPhoneEmailUri(contact: Contact): Observable<Contact> {
+    private fun getContactOfPhoneEmailUriObservable(contact: Contact): Observable<Contact> {
         val id = contact.id
         val phoneCursorObservable = Observable.just(
             cr.query(

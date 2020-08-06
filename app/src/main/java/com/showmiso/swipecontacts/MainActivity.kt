@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
@@ -45,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         btn_skip.setOnClickListener(onClickListener)
         btn_restore.setOnClickListener(onClickListener)
         btn_trash.setOnClickListener(onClickListener)
+        btn_try_again.setOnClickListener(onClickListener)
     }
 
     private val onClickListener = View.OnClickListener {
@@ -81,6 +83,13 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.btn_trash -> {
                 startActivity(Intent(this@MainActivity, TrashActivity::class.java))
+            }
+            R.id.btn_try_again -> {
+                if (contactAdapter.itemCount == skipCount) {
+                    skipCount = 0
+                    contactAdapter.clear()
+                }
+                getAllContacts()
             }
         }
     }
@@ -120,16 +129,32 @@ class MainActivity : AppCompatActivity() {
                 btn_trash.visibility = View.VISIBLE
             }
         }
+        checkCards()
     }
 
     private fun skipCard() {
         skipCount += 1
 //        Toast.makeText(applicationContext, "skip $skipCount", Toast.LENGTH_SHORT).show()
+        checkCards()
     }
 
     private fun restoreCard() {
         skipCount -= 1
 //        Toast.makeText(applicationContext, "restore $skipCount", Toast.LENGTH_SHORT).show()
+        checkRestoreCards()
+    }
+
+    private fun checkCards() {
+        // 남은 카드가 없으면
+        Log.d("checkCard", "")
+
+        if (contactAdapter.itemCount == skipCount) {
+            card_view.visibility = View.GONE
+        }
+    }
+
+    private fun checkRestoreCards() {
+        card_view.visibility = View.VISIBLE
     }
 
     private fun checkPermission() {
@@ -145,6 +170,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getAllContacts() {
+        card_view.visibility = View.VISIBLE
         contactPresenter.getContactAll(contactAdapter)
     }
 

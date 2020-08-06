@@ -37,6 +37,6 @@ class TrashActivity : AppCompatActivity(), TrashAdapter.OnItemClickListener {
     }
 
     override fun onDeleteItem(contact: Contact) {
-
+        contactPresenter.deleteContact(contact)
     }
 }
