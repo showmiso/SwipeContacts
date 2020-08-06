@@ -31,14 +31,12 @@ class ContactAdapter(
 //                    .centerCrop()
 //                    .into(itemView.img_thumbnail)
 
-
 //                val sd: ShapeDrawable = itemView.img_thumbnail.background as ShapeDrawable
 //                sd.paint.color = itemView.context.getColor(R.color.colorRed)
 
                 itemView.img_thumbnail.background.setTint(
                     itemView.context.getColor(randomColor[1])
                 )
-
             } else {
                 Glide.with(itemView.context)
                     .load(contact.uri)

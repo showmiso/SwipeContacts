@@ -41,7 +41,8 @@ class ContactPresenter(
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
-                val lookupKey = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY))
+                val lookupKey =
+                    cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY))
                 val uri = Uri.withAppendedPath(
                     ContactsContract.Contacts.CONTENT_LOOKUP_URI,
                     lookupKey
@@ -53,6 +54,31 @@ class ContactPresenter(
     }
 
     fun deleteContactList(contactList: ArrayList<Contact>) {
+        val idArray = ArrayList<String>()
+        for (contact in contactList) {
+            idArray.add(contact.id)
+        }
+
+        val cursor = cr.query(
+            ContactsContract.Contacts.CONTENT_URI,
+            null,
+            ContactsContract.Contacts._ID + "= ?",
+            idArray.toTypedArray(),
+            null
+        )
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                val lookupKey =
+                    cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY))
+                val uri = Uri.withAppendedPath(
+                    ContactsContract.Contacts.CONTENT_LOOKUP_URI,
+                    lookupKey
+                )
+                cr.delete(uri, ContactsContract.Contacts._ID + "= ?", idArray.toTypedArray())
+            } while (cursor.moveToNext())
+            cursor.close()
+        }
 
     }
 
@@ -66,7 +92,11 @@ class ContactPresenter(
             .subscribe({}, {
                 Log.d("Failed", "ERROR " + it.localizedMessage)
             }, {
-                Toast.makeText(context, "${contactAdapter.itemCount} 개의 연락처를 가져왔습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    "${contactAdapter.itemCount} 개의 연락처를 가져왔습니다.",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
             )
             .addTo(disposables)
@@ -99,6 +129,7 @@ class ContactPresenter(
                     val hasPhone =
                         cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))
                     val contact = Contact(id, name, hasPhone > 0)
+                    val familyName = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.FAMILY_NAME))
                     getContactOfPhoneEmailUriObservable(contact)
                         .observeOn(AndroidSchedulers.mainThread())
                         .map {
@@ -106,7 +137,10 @@ class ContactPresenter(
                             if (contactsList.size > UPDATE_SIZE) {
                                 contactsList.shuffle()
                                 contactAdapter.addList(contactsList)
-                                Log.d("getInfoObservable", "contactAdapter SIZE : ${contactAdapter.itemCount}")
+                                Log.d(
+                                    "getInfoObservable",
+                                    "contactAdapter SIZE : ${contactAdapter.itemCount}"
+                                )
                                 contactsList.clear()
                             }
                         }

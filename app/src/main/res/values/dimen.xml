@@ -2,6 +2,8 @@
 <resources>
     <dimen name="normal_icon_size">35dp</dimen>
     <dimen name="basic_margin">26dp</dimen>
-    <dimen name="radius_rect">15dp</dimen>
-    <dimen name="circle_size">65dp</dimen>
+    <dimen name="main_card_radius">15dp</dimen>
+    <dimen name="main_button_circle_size">65dp</dimen>
+    <dimen name="item_image_size">50dp</dimen>
+    <dimen name="item_margin">16dp</dimen>
 </resources>

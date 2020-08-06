@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/colorWhite">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btn_try_again"
@@ -67,25 +68,26 @@
         android:layout_marginTop="@dimen/basic_margin"
         android:layout_marginEnd="@dimen/basic_margin"
         android:src="@drawable/ic_setting"
-        android:tint="@color/colorBlack"
+        android:tint="@color/colorGray"
         />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btn_delete"
-        android:layout_width="@dimen/circle_size"
-        android:layout_height="@dimen/circle_size"
+        android:layout_width="@dimen/main_button_circle_size"
+        android:layout_height="@dimen/main_button_circle_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btn_restore"
         android:layout_marginEnd="45dp"
         android:background="@drawable/bg_circle"
         android:src="@drawable/ic_close"
         android:layout_marginBottom="@dimen/basic_margin"
+        android:backgroundTint="@color/colorOrange"
         />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btn_skip"
-        android:layout_width="@dimen/circle_size"
-        android:layout_height="@dimen/circle_size"
+        android:layout_width="@dimen/main_button_circle_size"
+        android:layout_height="@dimen/main_button_circle_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/btn_restore"
         android:layout_marginStart="45dp"
@@ -93,6 +95,7 @@
         android:src="@drawable/ic_check"
         android:layout_marginEnd="@dimen/basic_margin"
         android:layout_marginBottom="@dimen/basic_margin"
+        android:backgroundTint="@color/colorGreen"
         />
 
     <androidx.appcompat.widget.AppCompatImageView

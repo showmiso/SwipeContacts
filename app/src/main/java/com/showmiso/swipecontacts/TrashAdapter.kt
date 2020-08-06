@@ -17,6 +17,7 @@ class TrashAdapter(
         fun bind(contact: Contact) {
             itemView.txt_name.text = contact.name
             itemView.txt_phone.text = contact.phone
+            itemView.txt_email.text = contact.email
             itemView.btn_restore.setOnClickListener(this@TrashViewHolder)
             itemView.btn_delete.setOnClickListener(this@TrashViewHolder)
         }
