@@ -5,18 +5,59 @@ import android.content.ContentUris
 import android.content.Context
 import android.net.Uri
 import android.provider.ContactsContract
+import android.util.Log
 import com.showmiso.swipecontacts.model.Contact
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.BiFunction
 import io.reactivex.functions.Function3
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 
-class ContactManager(
+class ContactManager (
     private val context: Context
-) {
+) : Presenter {
     private val cr: ContentResolver = context.contentResolver
+    private val disposables = CompositeDisposable()
 
-    fun getInfoObservable(): Observable<ArrayList<Contact>> {
+    override fun onCreate() {
+    }
+
+    override fun onDestroy() {
+        disposables.clear()
+    }
+
+    fun getContactAll(contactAdapter: ContactAdapter) {
+        getInfoObservable()
+            .observeOn(AndroidSchedulers.mainThread())
+            .map {
+                Log.d("getContactAll", "List LENGTH " + it.size)
+                contactAdapter.addList(it)
+            }
+            .subscribe( {
+
+            }, {
+                Log.d("Failed", "ERROR " + it.localizedMessage)
+            }
+            )
+            .addTo(disposables)
+    }
+
+    fun getContactAll(contactListCallback: (ArrayList<Contact>) -> Unit) {
+        getInfoObservable()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    contactListCallback(it)
+                },{
+                    Log.d("getContactAll", "ERROR " + it.localizedMessage)
+                }
+            )
+            .addTo(disposables)
+    }
+
+    private fun getInfoObservable(): Observable<ArrayList<Contact>> {
         val displayName = ContactsContract.Contacts.DISPLAY_NAME_PRIMARY
         val filter = "$displayName NOT LIKE '%@%'"
         val order = String.format("%1\$s COLLATE NOCASE", displayName)
@@ -35,16 +76,22 @@ class ContactManager(
                 order
             )
         )
-            .flatMap { cursor ->
+            .map { cursor ->
                 cursor.moveToFirst()
-                val id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID))
-                val name = cursor.getString(cursor.getColumnIndex(displayName))
-                val hasPhone = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))
-                val contact = Contact(id, name, hasPhone > 0)
-                getContactInfoOfPhoneEmailUri(contact)
-            }
-            .map {
-                contactsList.add(it)
+                do {
+                    val id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID))
+                    val name = cursor.getString(cursor.getColumnIndex(displayName))
+                    val hasPhone = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))
+                    val contact = Contact(id, name, hasPhone > 0)
+                    val contactObservable = getContactInfoOfPhoneEmailUri(contact)
+                        .map {
+                            contactsList.add(it)
+                        }
+                        .subscribeOn(Schedulers.io())
+                        .subscribe()
+                        .addTo(disposables)
+                } while (cursor.moveToNext())
+                cursor.close()
                 contactsList
             }
             .subscribeOn(Schedulers.io())
@@ -239,4 +286,5 @@ class ContactManager(
 
         return contactsList
     }
+
 }

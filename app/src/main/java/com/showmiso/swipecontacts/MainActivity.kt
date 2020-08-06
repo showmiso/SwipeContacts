@@ -20,17 +20,17 @@ class MainActivity : AppCompatActivity() {
     private val manager by lazy { CardStackLayoutManager(this, onCardStackListener) }
     private var skipCount: Int = 0
     private val contactManager by lazy { ContactManager(this) }
-    private val disposables = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initUI()
         checkPermission()
+        contactManager.onCreate()
     }
 
     override fun onDestroy() {
-        disposables.clear()
+        contactManager.onDestroy()
         super.onDestroy()
     }
 
@@ -142,19 +142,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getAllContacts() {
-//        contactAdapter.updateContact(contactManager.getInfo2())
-
-        contactManager.getInfoObservable()
-            .subscribe(
-                {
-                    contactAdapter.updateContact(it)
-                }, {
-                    Log.d("TAG", "error " + it.localizedMessage)
-                }
-            )
-            .addTo(disposables)
-
-        Toast.makeText(this@MainActivity, "${contactAdapter.itemCount} 개 연락처를 가져왔습니다.", Toast.LENGTH_SHORT).show()
+//        contactManager.getContactAll {
+//            contactAdapter.updateContact(it)
+//            Toast.makeText(this@MainActivity, "${contactAdapter.itemCount} 개 연락처를 가져왔습니다.", Toast.LENGTH_SHORT).show()
+//        }
+        contactManager.getContactAll(contactAdapter)
     }
 
     override fun onRequestPermissionsResult(
