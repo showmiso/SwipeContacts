@@ -15,7 +15,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Function3
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
-import org.jetbrains.annotations.Contract
 
 class ContactPresenter(
     private val context: Context
@@ -30,56 +29,99 @@ class ContactPresenter(
         disposables.clear()
     }
 
-    fun deleteContact(contact: Contact) {
-        val cursor = cr.query(
-            ContactsContract.Contacts.CONTENT_URI,
-            null,
-            ContactsContract.Contacts._ID + "=" + contact.id,
-            null,
-            null
-        )
+//    fun deleteContact(contact: Contact) {
+//        val cursor = cr.query(
+//            ContactsContract.Contacts.CONTENT_URI,
+//            null,
+//            ContactsContract.Contacts._ID + "=" + contact.id,
+//            null,
+//            null
+//        )
+//
+//        if (cursor != null && cursor.moveToFirst()) {
+//            do {
+//                val lookupKey =
+//                    cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY))
+//                val uri = Uri.withAppendedPath(
+//                    ContactsContract.Contacts.CONTENT_LOOKUP_URI,
+//                    lookupKey
+//                )
+//                cr.delete(uri, ContactsContract.Contacts._ID + "=" + contact.id, null)
+//            } while (cursor.moveToNext())
+//            cursor.close()
+//        }
+//    }
 
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
+    fun deleteContact(contact: Contact) {
+        val id = contact.id
+        Observable.just(
+            cr.query(
+                ContactsContract.Contacts.CONTENT_URI,
+                null,
+                ContactsContract.Contacts._ID + "=" + id,
+                null,
+                null
+            )
+        )
+            .map { cursor ->
+                cursor.moveToFirst()
                 val lookupKey =
                     cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY))
                 val uri = Uri.withAppendedPath(
                     ContactsContract.Contacts.CONTENT_LOOKUP_URI,
                     lookupKey
                 )
-                cr.delete(uri, ContactsContract.Contacts._ID + "=" + contact.id, null)
-            } while (cursor.moveToNext())
-            cursor.close()
-        }
+                cr.delete(uri, ContactsContract.Contacts._ID + "=" + id, null)
+                cursor.close()
+            }
+            .subscribeOn(Schedulers.io())
+            .subscribe( {}, {
+                    Log.d("deleteContact", "Failed : " + it.localizedMessage)
+                }
+            )
+            .addTo(disposables)
     }
 
     fun deleteContactList(contactList: ArrayList<Contact>) {
-        val idArray = ArrayList<String>()
+        val strList = ArrayList<String>()
         for (contact in contactList) {
-            idArray.add(contact.id)
+            strList.add(contact.id)
         }
-
-        val cursor = cr.query(
-            ContactsContract.Contacts.CONTENT_URI,
-            null,
-            ContactsContract.Contacts._ID + "= ?",
-            idArray.toTypedArray(),
-            null
+//        val strArray = strList.toTypedArray()
+        Observable.just(
+            cr.query(
+                ContactsContract.Contacts.CONTENT_URI,
+                null,
+                null,
+                null,
+                null
+            )
         )
-
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
-                val lookupKey =
-                    cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY))
-                val uri = Uri.withAppendedPath(
-                    ContactsContract.Contacts.CONTENT_LOOKUP_URI,
-                    lookupKey
-                )
-                cr.delete(uri, ContactsContract.Contacts._ID + "= ?", idArray.toTypedArray())
-            } while (cursor.moveToNext())
-            cursor.close()
-        }
-
+            .map { cursor ->
+                cursor.moveToFirst()
+                do {
+                    val id = cursor.getString(cursor.getColumnIndex(ContactsContract.PhoneLookup._ID))
+                    if (strList.contains(id)) {
+                        val lookupKey =
+                            cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY))
+                        val uri = Uri.withAppendedPath(
+                            ContactsContract.Contacts.CONTENT_LOOKUP_URI,
+                            lookupKey
+                        )
+                        cr.delete(uri, ContactsContract.Contacts._ID + "=" + id, null)
+                    }
+                } while (cursor.moveToNext())
+                cursor.close()
+            }
+            .subscribeOn(Schedulers.io())
+            .subscribe(
+                {
+                    Log.d("deleteContactList", "Success")
+                }, {
+                    Log.d("deleteContactList", "Failed : " + it.localizedMessage)
+                }
+            )
+            .addTo(disposables)
     }
 
     fun getContactAll(contactAdapter: ContactAdapter) {
