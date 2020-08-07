@@ -21,8 +21,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_thumbnail"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/size_card_image"
+            android:layout_height="@dimen/size_card_image"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="@dimen/margin_card_outline"
@@ -38,8 +38,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/img_thumbnail"
             app:layout_constraintBottom_toBottomOf="@id/img_thumbnail"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="@dimen/margin_card_inline"
+            android:layout_marginEnd="@dimen/margin_card_outline"
+            android:text="@string/test_name_long"
+            style="@style/cardTitle"
+            android:maxLines="2"
+            android:ellipsize="end"
             />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -48,8 +52,9 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/img_thumbnail"
             app:layout_constraintStart_toStartOf="@id/img_thumbnail"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/margin_card_inline"
             android:text="@string/contact_phone"
+            style="@style/cardSubtitle"
             />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -58,6 +63,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/view_1"
             app:layout_constraintStart_toStartOf="@id/img_thumbnail"
+            android:text="@string/test_phone"
+            style="@style/cardSubText"
             />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -67,7 +74,7 @@
             app:layout_constraintTop_toBottomOf="@id/txt_phone"
             app:layout_constraintStart_toStartOf="@id/img_thumbnail"
             android:text="@string/contact_email"
-            android:layout_marginTop="10dp"
+            style="@style/cardSubtitle"
             />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -78,6 +85,7 @@
             app:layout_constraintStart_toStartOf="@id/img_thumbnail"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="@dimen/margin_card_outline"
+            style="@style/cardSubTextDefault"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

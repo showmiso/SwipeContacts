@@ -8,27 +8,39 @@
     tools:context=".SettingActivity"
     android:background="@color/colorWhite">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/btn_back"
-        android:layout_width="@dimen/size_main_button_medium"
-        android:layout_height="@dimen/size_main_button_medium"
-        android:src="@drawable/ic_back"
-        android:tint="@color/colorBlack"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="@dimen/margin_main"
-        android:layout_marginStart="@dimen/margin_main"
-        />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_header"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/setting_title"
-        android:layout_marginTop="100dp"
-        />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_back"
+            android:layout_width="@dimen/size_main_button_medium"
+            android:layout_height="@dimen/size_main_button_medium"
+            android:src="@drawable/ic_back"
+            android:tint="@color/colorBlack"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="@dimen/margin_main"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/setting_title"
+            style="@style/headerTitle"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btn_done"

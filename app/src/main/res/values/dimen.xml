@@ -16,8 +16,8 @@
     <dimen name="margin_item">16dp</dimen>
 
     <dimen name="height_header">75dp</dimen>
+    <dimen name="height_button_bottom">50dp</dimen>
 
     <dimen name="width_item_button">100dp</dimen>
-
 
 </resources>

@@ -17,11 +17,17 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/img_thumbnail"
         app:layout_constraintStart_toEndOf="@id/img_thumbnail"
-        android:layout_marginStart="10dp"
+        app:layout_constraintEnd_toStartOf="@id/btn_restore"
+        android:layout_marginStart="12dp"
+        android:text="@string/test_name_long"
+        style="@style/itemTitle"
+        android:layout_marginEnd="@dimen/margin_item"
+        android:maxLines="1"
+        android:ellipsize="end"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -31,6 +37,8 @@
         app:layout_constraintTop_toBottomOf="@id/txt_name"
         app:layout_constraintStart_toStartOf="@id/txt_name"
         android:layout_marginTop="5dp"
+        android:text="@string/test_email"
+        style="@style/itemSubText"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -40,13 +48,14 @@
         app:layout_constraintTop_toBottomOf="@id/txt_phone"
         app:layout_constraintStart_toStartOf="@id/txt_name"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="@string/contact_email_default"
         android:layout_marginBottom="@dimen/margin_item"
+        android:text="@string/contact_email_default"
+        style="@style/itemSubTextDefault"
         />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btn_restore"
-        android:layout_width="100dp"
+        android:layout_width="@dimen/width_item_button"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,6 +72,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/img_icon_1"
+            style="@style/itemAccent"
             />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -82,7 +92,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btn_delete"
-        android:layout_width="100dp"
+        android:layout_width="@dimen/width_item_button"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,6 +111,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/img_icon_2"
+            style="@style/itemAccent"
             />
 
         <androidx.appcompat.widget.AppCompatImageView

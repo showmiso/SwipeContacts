@@ -17,9 +17,10 @@
 
     <string name="setting_title">SETTING</string>
     <string name="setting_done">DONE</string>
-    <string name="setting_license">OPEN SOURCE LICENSE</string>
+    <string name="setting_license">OPEN SOURCE LICENSE</string>\
 
     <string name="test_name">김정문</string>
+    <string name="test_name_long">전기전자 공학부 김정민 선배</string>
     <string name="test_phone">010–5550–8540</string>
     <string name="test_email">test13254@gmail.com</string>
 

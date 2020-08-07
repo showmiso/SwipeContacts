@@ -2,6 +2,7 @@ package com.showmiso.swipecontacts
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.showmiso.swipecontacts.model.Contact
 import com.showmiso.swipecontacts.presenter.ContactPresenter
@@ -21,7 +22,7 @@ class TrashActivity : AppCompatActivity(), TrashAdapter.OnItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trash)
-        initView()
+        initUI()
     }
 
     override fun onDestroy() {
@@ -29,11 +30,24 @@ class TrashActivity : AppCompatActivity(), TrashAdapter.OnItemClickListener {
         super.onDestroy()
     }
 
-    private fun initView() {
+    private fun initUI() {
         val trashAdapter = TrashAdapter(this)
         list_contact.adapter = trashAdapter
         list_contact.layoutManager = LinearLayoutManager(this)
         trashAdapter.updateContact(deleteList)
+
+        btn_delete_all.setOnClickListener(onClickListener)
+    }
+
+    private val onClickListener = View.OnClickListener {
+        when (it.id) {
+            R.id.btn_delete_all -> {
+                contactPresenter.deleteContactList(deleteList)
+            }
+            R.id.btn_back -> {
+                onBackPressed()
+            }
+        }
     }
 
     override fun onDeleteItem(contact: Contact) {
