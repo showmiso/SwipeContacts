@@ -8,4 +8,59 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="headerTitle">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">50sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="commonText">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="itemTitle">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="itemSubText">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="itemSubTextDefault">
+        <item name="android:textColor">@color/colorGray</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="itemButtonText">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="cardTitle">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">45sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="cardSubText">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="cardSubTextDefault">
+        <item name="android:textColor">@color/colorSilver</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="cardDescText">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
 </resources>

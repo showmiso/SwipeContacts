@@ -129,7 +129,6 @@ class ContactPresenter(
                     val hasPhone =
                         cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))
                     val contact = Contact(id, name, hasPhone > 0)
-                    val familyName = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.StructuredName.FAMILY_NAME))
                     getContactOfPhoneEmailUriObservable(contact)
                         .observeOn(AndroidSchedulers.mainThread())
                         .map {

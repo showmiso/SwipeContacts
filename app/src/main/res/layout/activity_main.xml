@@ -48,12 +48,12 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btn_trash"
-        android:layout_width="@dimen/normal_icon_size"
-        android:layout_height="@dimen/normal_icon_size"
+        android:layout_width="@dimen/size_main_button_medium"
+        android:layout_height="@dimen/size_main_button_medium"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="@dimen/basic_margin"
-        android:layout_marginStart="@dimen/basic_margin"
+        android:layout_marginTop="@dimen/margin_main"
+        android:layout_marginStart="@dimen/margin_main"
         android:src="@drawable/ic_delete"
         android:tint="@color/colorGray"
         android:visibility="gone"
@@ -61,40 +61,40 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btn_setting"
-        android:layout_width="@dimen/normal_icon_size"
-        android:layout_height="@dimen/normal_icon_size"
+        android:layout_width="@dimen/size_main_button_medium"
+        android:layout_height="@dimen/size_main_button_medium"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/basic_margin"
-        android:layout_marginEnd="@dimen/basic_margin"
+        android:layout_marginTop="@dimen/margin_main"
+        android:layout_marginEnd="@dimen/margin_main"
         android:src="@drawable/ic_setting"
         android:tint="@color/colorGray"
         />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btn_delete"
-        android:layout_width="@dimen/main_button_circle_size"
-        android:layout_height="@dimen/main_button_circle_size"
+        android:layout_width="@dimen/size_main_button_large"
+        android:layout_height="@dimen/size_main_button_large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btn_restore"
         android:layout_marginEnd="45dp"
         android:background="@drawable/bg_circle"
         android:src="@drawable/ic_close"
-        android:layout_marginBottom="@dimen/basic_margin"
+        android:layout_marginBottom="@dimen/margin_main"
         android:backgroundTint="@color/colorOrange"
         />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btn_skip"
-        android:layout_width="@dimen/main_button_circle_size"
-        android:layout_height="@dimen/main_button_circle_size"
+        android:layout_width="@dimen/size_main_button_large"
+        android:layout_height="@dimen/size_main_button_large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/btn_restore"
         android:layout_marginStart="45dp"
         android:background="@drawable/bg_circle"
         android:src="@drawable/ic_check"
-        android:layout_marginEnd="@dimen/basic_margin"
-        android:layout_marginBottom="@dimen/basic_margin"
+        android:layout_marginEnd="@dimen/margin_main"
+        android:layout_marginBottom="@dimen/margin_main"
         android:backgroundTint="@color/colorGreen"
         />
 

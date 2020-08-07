@@ -13,6 +13,29 @@
     <color name="colorSilver">#BDC3C7</color>
     <color name="colorAsbestos">#7F8C8D</color>
 
+    <color name="RichBlueBlack">#011627</color>
+    <color name="PerlWhite">#fdfffc</color>
+    <color name="Mint">#2ec4b6</color>
+    <color name="BrightRed">#e71d36</color>
+    <color name="YellowOrange">#ff9f1c</color>
+
+    <color name="RichBlack">#0c090d</color>
+    <color name="PinkRed">#e01a4f</color>
+    <color name="OpalOrange">#f15946</color>
+    <color name="OrangeYellow">#f9c22e</color>
+    <color name="MaximumSkyBlue">#53b3cb</color>
+
+    f94144-f3722c-f8961e-f9c74f-90be6d-43aa8b-4d908e
+
+    <color name="RedSalsa">#f94144</color>
+    <color name="OrangeRed">#f3722c</color>
+    <color name="YellowOrange2">#f8961e</color>
+    <color name="MaizeYellow">#f9c74f</color>
+    <color name="Pistachio">#90be6d</color>
+    <color name="EmeraldGreen">#43aa8b</color>
+    <color name="CadetBlue">#4d908e</color>
+
+
     <color name="colorGreen">#2ECC71</color>
     <color name="colorGreenDeep">#27AE60</color>
     <color name="colorBlue">#3498DB</color>
