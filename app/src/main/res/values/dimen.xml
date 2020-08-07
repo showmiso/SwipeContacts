@@ -25,4 +25,7 @@
 
     <dimen name="width_item_button">100dp</dimen>
 
+    <dimen name="elevation_main">10dp</dimen>
+
+
 </resources>

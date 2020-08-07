@@ -56,7 +56,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="@dimen/margin_main"
         android:layout_marginStart="@dimen/margin_main"
-        android:src="@drawable/ic_delete"
+        android:src="@drawable/trashcan"
         android:tint="@color/colorGray"
         android:visibility="gone"
         />
@@ -83,8 +83,9 @@
         android:background="@drawable/bg_circle"
         android:src="@drawable/ic_close"
         android:layout_marginBottom="@dimen/margin_main"
-        android:backgroundTint="@color/colorOrange"
         android:padding="5dp"
+        android:backgroundTint="@color/colorOrange"
+        android:elevation="@dimen/elevation_main"
         />
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -100,6 +101,7 @@
         android:layout_marginBottom="@dimen/margin_main"
         android:backgroundTint="@color/colorGreen"
         android:padding="5dp"
+        android:elevation="@dimen/elevation_main"
         />
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -114,6 +116,7 @@
         android:src="@drawable/refresh"
         android:tint="@color/colorWhite"
         android:padding="3dp"
+        android:elevation="@dimen/elevation_main"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
