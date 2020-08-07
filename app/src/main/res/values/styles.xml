@@ -30,11 +30,6 @@
         <item name="android:textSize">13sp</item>
     </style>
 
-    <style name="itemSubTextDefault">
-        <item name="android:textColor">@color/colorGray</item>
-        <item name="android:textSize">13sp</item>
-    </style>
-
     <style name="itemAccent">
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">12sp</item>
@@ -53,20 +48,39 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="cardSubTextDefault">
-        <item name="android:textColor">@color/colorSilver</item>
-        <item name="android:textSize">30sp</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
     <style name="cardSubtitle">
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">15sp</item>
     </style>
 
+    <style name="dialogTitle">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="dialogMessage">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="dialogOk">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="dialogCancel">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
     <style name="bottomButtonText">
         <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textSize">30dp</item>
+        <item name="android:textSize">30sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
     </style>

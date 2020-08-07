@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorWhite">
+    android:background="@drawable/bg_selector_item">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_thumbnail"
@@ -13,6 +13,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="@dimen/margin_item"
         android:layout_marginTop="@dimen/margin_item"
+        android:background="@drawable/bg_circle"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -50,7 +51,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="@dimen/margin_item"
         android:text="@string/contact_email_default"
-        style="@style/itemSubTextDefault"
+        style="@style/itemSubText"
         />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -63,6 +64,7 @@
         android:background="@drawable/bg_round_rect"
         android:layout_marginEnd="@dimen/margin_item"
         android:layout_marginTop="@dimen/margin_item"
+        android:backgroundTint="@color/colorGray"
         >
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"

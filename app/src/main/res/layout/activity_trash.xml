@@ -22,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="@dimen/margin_main"
+            android:layout_marginStart="@dimen/margin_item"
             />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -44,6 +44,7 @@
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/layout_header"
         app:layout_constraintBottom_toTopOf="@id/btn_delete_all"
+        android:background="@color/colorBackground"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -54,7 +55,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@color/RedSalsa"
+        android:background="@color/colorRed"
         style="@style/bottomButtonText"
         />
 

@@ -14,9 +14,13 @@
     <dimen name="margin_card_outline">26dp</dimen>
     <dimen name="margin_card_inline">16dp</dimen>
     <dimen name="margin_item">16dp</dimen>
+    <dimen name="margin_dialog">40dp</dimen>
 
     <dimen name="height_header">75dp</dimen>
-    <dimen name="height_button_bottom">50dp</dimen>
+    <dimen name="height_button_bottom">60dp</dimen>
+    <dimen name="height_card">320dp</dimen>
+    <dimen name="height_dialog_message">130dp</dimen>
+    <dimen name="height_dialog_button">60dp</dimen>
 
     <dimen name="width_item_button">100dp</dimen>
 

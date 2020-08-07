@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initUI() {
+        manager.setStackFrom(StackFrom.Top)
         card_view.layoutManager = manager
         card_view.adapter = contactAdapter
 

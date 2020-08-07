@@ -87,7 +87,6 @@ class ContactPresenter(
         for (contact in contactList) {
             strList.add(contact.id)
         }
-//        val strArray = strList.toTypedArray()
         Observable.just(
             cr.query(
                 ContactsContract.Contacts.CONTENT_URI,

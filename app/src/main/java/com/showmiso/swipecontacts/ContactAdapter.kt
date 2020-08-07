@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.showmiso.swipecontacts.model.Contact
 import com.showmiso.swipecontacts.utils.DrawableManager
 import kotlinx.android.synthetic.main.view_contact_card.view.*
@@ -18,30 +19,23 @@ class ContactAdapter(
         fun bind(contact: Contact) {
             itemView.txt_name.text = contact.name
             itemView.txt_phone.text = contact.phone
-            itemView.txt_email.text = contact.email
+            if (contact.email == "") {
+                itemView.txt_email.text = itemView.context.getString(R.string.contact_email_default)
+                itemView.txt_email.setTextColor(itemView.context.getColor(R.color.colorSilver))
+            } else {
+                itemView.txt_email.text = contact.email
+                itemView.txt_email.setTextColor(itemView.context.getColor(R.color.colorWhite))
+            }
 
             val randomColor = DrawableManager.randomColor()
             if (contact.uri == null) {
-//                val drawable = DrawableManager.changeDrawableSolidColor(
-//                    itemView.context,
-//                    R.drawable.bg_circle)
-//                Glide.with(itemView.context)
-//                    .load(drawable)
-//                    .circleCrop()
-//                    .centerCrop()
-//                    .into(itemView.img_thumbnail)
-
-//                val sd: ShapeDrawable = itemView.img_thumbnail.background as ShapeDrawable
-//                sd.paint.color = itemView.context.getColor(R.color.colorRed)
-
                 itemView.img_thumbnail.background.setTint(
                     itemView.context.getColor(randomColor[1])
                 )
             } else {
                 Glide.with(itemView.context)
                     .load(contact.uri)
-                    .circleCrop()
-                    .centerCrop()
+                    .transform(CircleCrop())
                     .into(itemView.img_thumbnail)
             }
 

@@ -10,6 +10,8 @@ import kotlin.random.Random
 class DrawableManager {
 
     companion object {
+        private var pastNumber: Int = 0
+
         fun changeDrawableSolidColor(context: Context, drawableId: Int): Drawable {
             val target = context.getDrawable(drawableId)
             val colors =
@@ -27,7 +29,11 @@ class DrawableManager {
         }
 
         fun randomColor(): Array<Int> {
-            val randomNumber = Random.nextInt(colorSet.size / 2) * 2
+            var randomNumber = 0
+            do {
+                randomNumber = Random.nextInt(colorSet.size / 2) * 2
+            } while (pastNumber == randomNumber)
+            pastNumber = randomNumber
             return arrayOf(colorSet[randomNumber], colorSet[randomNumber + 1])
         }
 
