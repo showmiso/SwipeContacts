@@ -1,5 +1,6 @@
 package com.showmiso.swipecontacts
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
@@ -75,7 +76,7 @@ class SettingActivity : AppCompatActivity() {
                 onBackPressed()
             }
             R.id.btn_license -> {
-
+                startActivity(Intent(this, LicenseActivity::class.java))
             }
         }
     }
