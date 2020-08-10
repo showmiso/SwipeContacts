@@ -18,7 +18,7 @@
     <string name="setting_title">SETTING</string>
     <string name="setting_done">DONE</string>
 
-    <string name="license_title">OPENSOURCE LICENSE</string>
+    <string name="license_title">OPEN SOURCE LICENSE</string>
 
     <string name="dialog_message">This behavior is irreversible.\nDo you really want to delete all your contacts?</string>
     <string name="dialog_ok">OK</string>
