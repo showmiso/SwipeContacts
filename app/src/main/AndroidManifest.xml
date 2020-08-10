@@ -23,6 +23,10 @@
         <activity android:name=".TrashActivity" />
         <activity android:name=".SettingActivity" />
         <activity android:name=".LicenseActivity" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/google_ad_mob_id"/>
     </application>
 
 </manifest>

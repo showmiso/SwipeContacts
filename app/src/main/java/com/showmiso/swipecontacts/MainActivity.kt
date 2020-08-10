@@ -9,6 +9,7 @@ import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.ads.MobileAds
 import com.showmiso.swipecontacts.presenter.ContactPresenter
 import com.showmiso.swipecontacts.utils.Constants
 import com.yuyakaido.android.cardstackview.*
