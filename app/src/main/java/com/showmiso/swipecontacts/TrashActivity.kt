@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.showmiso.swipecontacts.dialog.TwoButtonDialogFragment
 import com.showmiso.swipecontacts.model.Contact
 import com.showmiso.swipecontacts.presenter.ContactPresenter
+import com.showmiso.swipecontacts.utils.AdMobManager
 import kotlinx.android.synthetic.main.activity_trash.*
 
 class TrashActivity : AppCompatActivity(), TrashAdapter.OnItemClickListener {
@@ -44,6 +45,13 @@ class TrashActivity : AppCompatActivity(), TrashAdapter.OnItemClickListener {
         trashAdapter.updateContact(deleteList)
         btn_delete_all.setOnClickListener(onClickListener)
         btn_back.setOnClickListener(onClickListener)
+
+        val banner = AdMobManager(
+            this,
+            layout_ad_view_container,
+            TrashActivity::class.simpleName!!
+        )
+        banner.initBanner()
     }
 
     private val onClickListener = View.OnClickListener {

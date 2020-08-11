@@ -23,7 +23,7 @@
     <dimen name="height_dialog_message">130dp</dimen>
     <dimen name="height_dialog_button">60dp</dimen>
 
-    <dimen name="height_sub_title">50dp</dimen>
+    <dimen name="height_sub_title">60dp</dimen>
 
     <dimen name="width_item_button">100dp</dimen>
 

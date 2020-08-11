@@ -10,7 +10,8 @@
         android:id="@+id/layout_header"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_header"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorWhite">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btn_back"
@@ -39,19 +40,22 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/layout_header">
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/layout_header"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:fillViewport="true"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:background="@color/colorWhite"
             >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_sub_title"
-                android:background="@drawable/bg_round_rect"
                 >
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -62,6 +66,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="@dimen/margin_main"
                     android:text="@string/license_1"
+                    style="@style/MenuTitle"
                     />
 
                 <androidx.appcompat.widget.AppCompatCheckBox
@@ -74,7 +79,14 @@
                     android:layout_marginEnd="@dimen/margin_main"
                     android:background="@drawable/bg_selector_into"
                     android:button="@android:color/transparent"
-                    android:backgroundTint="@color/colorBlack"
+                    android:backgroundTint="@color/colorDarkGray"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/colorGray"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -85,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_main"
                 android:layout_marginEnd="@dimen/margin_main"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
@@ -94,6 +106,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    style="@style/MenuContext"
                     />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -101,7 +114,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_sub_title"
-                android:background="@drawable/bg_round_rect"
                 >
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -112,6 +124,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="@dimen/margin_main"
                     android:text="@string/license_2"
+                    style="@style/MenuTitle"
                     />
 
                 <androidx.appcompat.widget.AppCompatCheckBox
@@ -124,7 +137,14 @@
                     android:layout_marginEnd="@dimen/margin_main"
                     android:background="@drawable/bg_selector_into"
                     android:button="@android:color/transparent"
-                    android:backgroundTint="@color/colorBlack"
+                    android:backgroundTint="@color/colorDarkGray"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/colorGray"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -135,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_main"
                 android:layout_marginEnd="@dimen/margin_main"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
@@ -145,6 +165,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginBottom="@dimen/margin_main"
+                    style="@style/MenuContext"
                     />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
