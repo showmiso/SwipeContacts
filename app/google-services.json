@@ -1,0 +1,41 @@
+{
+  "project_info": {
+    "project_number": "1036995377882",
+    "firebase_url": "https://swipecontacts.firebaseio.com",
+    "project_id": "swipecontacts",
+    "storage_bucket": "swipecontacts.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1036995377882:android:84f32985d52adca36243e3",
+        "android_client_info": {
+          "package_name": "com.showmiso.swipecontacts"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1036995377882-ptcfact8irisk2o4hganogr3sfmektpn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaxj0o-cEuSRf9Uej0YWSdSlmZbPUFkV4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1036995377882-ptcfact8irisk2o4hganogr3sfmektpn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-6326941174130394~1915929397"
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -82,9 +82,10 @@
         app:layout_constraintEnd_toStartOf="@id/btn_restore"
         android:layout_marginEnd="45dp"
         android:background="@drawable/bg_circle"
-        android:src="@drawable/ic_close"
+        android:src="@drawable/ic_reply"
+        android:tint="@color/colorWhite"
         android:layout_marginBottom="@dimen/margin_main"
-        android:padding="5dp"
+        android:padding="10dp"
         android:backgroundTint="@color/colorOrange"
         android:elevation="@dimen/elevation_main"
         />
@@ -97,11 +98,11 @@
         app:layout_constraintStart_toEndOf="@id/btn_restore"
         android:layout_marginStart="45dp"
         android:background="@drawable/bg_circle"
-        android:src="@drawable/ic_check"
+        android:src="@drawable/ic_get_app"
         android:layout_marginEnd="@dimen/margin_main"
         android:layout_marginBottom="@dimen/margin_main"
         android:backgroundTint="@color/colorGreen"
-        android:padding="5dp"
+        android:padding="10dp"
         android:elevation="@dimen/elevation_main"
         />
 
