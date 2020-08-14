@@ -78,7 +78,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="@dimen/margin_main"
-                android:text="10"
                 style="@style/itemTitle"
                 />
 

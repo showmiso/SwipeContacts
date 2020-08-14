@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SwipeContacts</string>
+    <string name="contact_phone">電話</string>
+    <string name="contact_email">電子郵件</string>
+    <string name="contact_email_default">沒有電子郵件</string>
+    <string name="main_save">保存</string>
+    <string name="main_delete">刪除</string>
+    <string name="main_restore">恢復</string>
+    <string name="main_try_again">重新排列</string>
+    <string name="trash_title">垃圾</string>
+    <string name="trash_delete_all">刪除所有</string>
+    <string name="setting_title">設置</string>
+    <string name="setting_done">完成</string>
+    <string name="license_title">開源許可證</string>
+    <string name="dialog_message">此行為是不可逆的。 您確定要刪除所有內容嗎？</string>
+    <string name="dialog_ok">好</string>
+    <string name="dialog_cancel">取消</string>
+    <string name="setting_deleted_title">到目前為止已刪除的聯繫人數量</string>
+    <string name="setting_version">版</string>
+    <string name="setting_contact_us">聯繫</string>
+    <string name="setting_help">救命</string>
+
+    <string name="on_boarding_message_1">向左滑動聯繫人以進入垃圾箱。</string>
+    <string name="on_boarding_message_2">輕觸右側的聯繫人以保留該聯繫人。</string>
+    <string name="on_boarding_message_3">可以將其不小心丟進垃圾桶！\n您可以從回收站中刪除或恢復聯繫人。</string>
+
+</resources>
