@@ -2,7 +2,6 @@
     <string name="app_name">SwipeContacts</string>
 
     <!-- [where]_[desc]  -->
-
     <string name="contact_phone">PHONE</string>
     <string name="contact_email">EMAIL</string>
     <string name="contact_email_default">No Email</string>
@@ -17,6 +16,23 @@
 
     <string name="setting_title">SETTING</string>
     <string name="setting_done">DONE</string>
+    <string name="setting_help">HELP</string>
+    <string name="setting_deleted_title">Number of contacts\ndeleted so far is </string>
+    <string name="setting_version">VERSION</string>
+    <string name="setting_contact_us">CONTACT US</string>
+
+    <string name="dialog_message">This behavior is irreversible.\nDo you really want to delete all?</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel" tools:ignore="ButtonCase">CANCEL</string>
+
+    <string name="on_boarding_message_1">Swipe Left Side !\nContact Go Trash !</string>
+    <string name="on_boarding_message_2">Swipe Right Means Skip this CARD !</string>
+    <string name="on_boarding_message_3">It\'s OK !\nYou can delete or recover the card from the trash.</string>
+
+    <string name="test_name" translatable="false">김정문</string>
+    <string name="test_name_long" translatable="false">전기전자 공학부 김정민 선배</string>
+    <string name="test_phone" translatable="false">010–5550–8540</string>
+    <string name="test_email" translatable="false">test13254@gmail.com</string>
 
     <string name="license_title">OPENSOURCE LICENSE</string>
     <string name="license_1" translatable="false">CardStackView</string>
@@ -64,18 +80,5 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n
     </string>
-
-    <string name="dialog_message">This behavior is irreversible.\nDo you really want to delete all your contacts?</string>
-    <string name="dialog_ok">OK</string>
-    <string name="dialog_cancel" tools:ignore="ButtonCase">CANCEL</string>
-
-    <string name="setting_deleted_title">Number of contacts\ndeleted so far is </string>
-    <string name="setting_version">VERSION</string>
-    <string name="setting_contact_us">CONTACT US</string>
-
-    <string name="test_name">김정문</string>
-    <string name="test_name_long">전기전자 공학부 김정민 선배</string>
-    <string name="test_phone">010–5550–8540</string>
-    <string name="test_email">test13254@gmail.com</string>
 
 </resources>

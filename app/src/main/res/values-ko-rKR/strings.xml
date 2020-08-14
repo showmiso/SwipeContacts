@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SwipeContacts</string>
+    <string name="on_boarding_message_1">연락처를 왼쪽으로 넘기면 휴지통에 담깁니다.</string>
+    <string name="on_boarding_message_2">연락처를 오른쪽으로 넘기면 보관합니다.</string>
+    <string name="on_boarding_message_3">실수로 휴지통에 넣어도 괜찮아요! 휴지통에서 삭제하거나 복구할 수 있습니다.</string>
+    <string name="contact_phone">휴대폰</string>
+    <string name="contact_email">이메일</string>
+    <string name="contact_email_default">없음</string>
+    <string name="main_save">저장</string>
+    <string name="main_delete">삭제</string>
+    <string name="main_restore">복구</string>
+    <string name="main_try_again">다시 정리하기</string>
+    <string name="trash_title">휴지통</string>
+    <string name="trash_delete_all">모두삭제</string>
+    <string name="setting_title">설정</string>
+    <string name="setting_done">완료</string>
+    <string name="license_title">오픈소스 라이선스</string>
+    <string name="dialog_message">이 동작은 되돌릴 수 없습니다.\n정말로 모두 삭제하시겠습니까?</string>
+    <string name="dialog_ok">삭제</string>
+    <string name="dialog_cancel">취소</string>
+    <string name="setting_deleted_title">지금까지 삭제한 연락처 수</string>
+    <string name="setting_version">버전</string>
+    <string name="setting_contact_us">연락하기</string>
+    <string name="setting_help">도움말</string>
+</resources>
