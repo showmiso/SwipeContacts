@@ -142,7 +142,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="@dimen/margin_main"
                 android:src="@drawable/ic_into"
-                android:tint="@color/colorDarkGray"
+                android:tint="@color/colorGray"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -177,7 +177,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="@dimen/margin_main"
                 android:src="@drawable/ic_into"
-                android:tint="@color/colorDarkGray"
+                android:tint="@color/colorGray"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

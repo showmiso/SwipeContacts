@@ -8,7 +8,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.showmiso.swipecontacts.model.Contact
 import com.showmiso.swipecontacts.utils.DrawableManager
-import kotlinx.android.synthetic.main.view_trash_item.view.*
+//import kotlinx.android.synthetic.main.view_trash_item.view.*
+import kotlinx.android.synthetic.main.view_trash_item_horizontal.view.*
 
 class TrashAdapter(
     private val listener: OnItemClickListener
@@ -38,7 +39,7 @@ class TrashAdapter(
                 .into(itemView.img_thumbnail)
 
             itemView.btn_restore.setOnClickListener(this@TrashViewHolder)
-            itemView.btn_delete.setOnClickListener(this@TrashViewHolder)
+//            itemView.btn_delete.setOnClickListener(this@TrashViewHolder)
         }
 
         override fun onClick(v: View) {
@@ -54,7 +55,7 @@ class TrashAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrashViewHolder {
         val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.view_trash_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.view_trash_item_horizontal, parent, false)
         return TrashViewHolder(view)
     }
 

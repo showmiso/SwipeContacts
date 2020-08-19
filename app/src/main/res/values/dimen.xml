@@ -7,7 +7,7 @@
     <dimen name="size_main_button_medium">40dp</dimen>
     <dimen name="size_item_image">50dp</dimen>
     <dimen name="size_card_image">100dp</dimen>
-    <dimen name="size_item_icon">24dp</dimen>
+    <dimen name="size_item_icon">30dp</dimen>
 
     <dimen name="radius_main_card">15dp</dimen>
 
