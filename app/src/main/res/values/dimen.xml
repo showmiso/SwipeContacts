@@ -20,7 +20,7 @@
     <dimen name="height_header">75dp</dimen>
     <dimen name="height_button_bottom">60dp</dimen>
     <dimen name="height_card">320dp</dimen>
-    <dimen name="height_dialog_message">130dp</dimen>
+    <dimen name="height_dialog_message">110dp</dimen>
     <dimen name="height_dialog_button">60dp</dimen>
 
     <dimen name="height_sub_title">60dp</dimen>

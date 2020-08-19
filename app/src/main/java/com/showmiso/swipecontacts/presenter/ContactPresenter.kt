@@ -29,29 +29,6 @@ class ContactPresenter(
         disposables.clear()
     }
 
-//    fun deleteContact(contact: Contact) {
-//        val cursor = cr.query(
-//            ContactsContract.Contacts.CONTENT_URI,
-//            null,
-//            ContactsContract.Contacts._ID + "=" + contact.id,
-//            null,
-//            null
-//        )
-//
-//        if (cursor != null && cursor.moveToFirst()) {
-//            do {
-//                val lookupKey =
-//                    cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY))
-//                val uri = Uri.withAppendedPath(
-//                    ContactsContract.Contacts.CONTENT_LOOKUP_URI,
-//                    lookupKey
-//                )
-//                cr.delete(uri, ContactsContract.Contacts._ID + "=" + contact.id, null)
-//            } while (cursor.moveToNext())
-//            cursor.close()
-//        }
-//    }
-
     fun deleteContact(contact: Contact) {
         val id = contact.id
         Observable.just(

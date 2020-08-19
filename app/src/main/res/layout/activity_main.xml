@@ -82,11 +82,11 @@
         app:layout_constraintEnd_toStartOf="@id/btn_restore"
         android:layout_marginEnd="45dp"
         android:background="@drawable/bg_circle"
-        android:src="@drawable/ic_reply"
-        android:tint="@color/colorWhite"
+        android:src="@drawable/ic_close"
+        android:tint="@color/colorOrange"
         android:layout_marginBottom="@dimen/margin_main"
         android:padding="10dp"
-        android:backgroundTint="@color/colorOrange"
+        android:backgroundTint="@color/colorWhite"
         android:elevation="@dimen/elevation_main"
         />
 
@@ -98,10 +98,11 @@
         app:layout_constraintStart_toEndOf="@id/btn_restore"
         android:layout_marginStart="45dp"
         android:background="@drawable/bg_circle"
-        android:src="@drawable/ic_get_app"
+        android:src="@drawable/ic_check"
+        android:tint="@color/colorGreen"
         android:layout_marginEnd="@dimen/margin_main"
         android:layout_marginBottom="@dimen/margin_main"
-        android:backgroundTint="@color/colorGreen"
+        android:backgroundTint="@color/colorWhite"
         android:padding="10dp"
         android:elevation="@dimen/elevation_main"
         />
@@ -116,7 +117,8 @@
         app:layout_constraintBottom_toBottomOf="@id/btn_skip"
         android:background="@drawable/bg_circle"
         android:src="@drawable/img_refresh"
-        android:tint="@color/colorWhite"
+        android:tint="@color/colorGray"
+        android:backgroundTint="@color/colorWhite"
         android:padding="3dp"
         android:elevation="@dimen/elevation_main"
         />

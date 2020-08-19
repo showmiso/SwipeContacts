@@ -38,13 +38,13 @@
 
     <style name="cardTitle">
         <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textSize">38sp</item>
+        <item name="android:textSize">28sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="cardSubText">
         <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">25sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -55,32 +55,32 @@
 
     <style name="dialogTitle">
         <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">25sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="dialogMessage">
         <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="dialogOk">
         <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
     </style>
 
     <style name="dialogCancel">
         <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
     </style>
 
     <style name="bottomButtonText">
         <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textSize">25sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
     </style>
