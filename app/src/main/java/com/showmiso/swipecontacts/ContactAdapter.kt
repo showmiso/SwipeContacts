@@ -10,9 +10,7 @@ import com.showmiso.swipecontacts.model.Contact
 import com.showmiso.swipecontacts.utils.DrawableManager
 import kotlinx.android.synthetic.main.view_contact_card.view.*
 
-class ContactAdapter(
-    private val layoutId: Int
-) : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
+class ContactAdapter : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
     private var contactsList = ArrayList<Contact>()
 
     class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -28,23 +26,20 @@ class ContactAdapter(
             }
 
             val randomColor = DrawableManager.randomColor()
-            if (contact.uri == null) {
-                itemView.img_thumbnail.background.setTint(
-                    itemView.context.getColor(randomColor[1])
-                )
-            } else {
-                Glide.with(itemView.context)
-                    .load(contact.uri)
-                    .transform(CircleCrop())
-                    .into(itemView.img_thumbnail)
-            }
+            itemView.img_thumbnail.background.setTint(
+                itemView.context.getColor(randomColor[1])
+            )
+            Glide.with(itemView.context)
+                .load(contact.uri)
+                .transform(CircleCrop())
+                .into(itemView.img_thumbnail)
 
             itemView.layout_card.background.setTint(itemView.context.getColor(randomColor[0]))
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.view_contact_card, parent, false)
         return ContactViewHolder(view)
     }
 

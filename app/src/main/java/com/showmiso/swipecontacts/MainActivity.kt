@@ -15,7 +15,7 @@ import com.yuyakaido.android.cardstackview.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private val contactAdapter by lazy { ContactAdapter(R.layout.view_contact_card) }
+    private val contactAdapter by lazy { ContactAdapter() }
     private val manager by lazy { CardStackLayoutManager(this, onCardStackListener) }
     private var skipCount: Int = 0
     private val contactPresenter by lazy {

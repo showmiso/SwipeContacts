@@ -37,17 +37,17 @@
 <!--    <color name="CadetBlue">#4d908e</color>-->
 
     <color name="colorGreen">#2ECC71</color>
-    <color name="colorGreenDeep">#27AE60</color>
+    <color name="colorGreenDeep">#25a25a</color>
     <color name="colorBlue">#3498DB</color>
-    <color name="colorBlueDeep">#2980B9</color>
+    <color name="colorBlueDeep">#217dbb</color>
     <color name="colorPurple">#9B59B6</color>
-    <color name="colorPurpleDeep">#8E44AD</color>
+    <color name="colorPurpleDeep">#804399</color>
     <color name="colorYellow">#F1C40F</color>
-    <color name="colorYellowDeep">#F39C12</color>
+    <color name="colorYellowDeep">#E67E22</color>
     <color name="colorOrange">#E67E22</color>
-    <color name="colorOrangeDeep">#D35400</color>
+    <color name="colorOrangeDeep">#bf6516</color>
     <color name="colorRed">#E74C3C</color>
-    <color name="colorRedDeep">#C0392B</color>
+    <color name="colorRedDeep">#bf2718</color>
 
 <!--    <color name="colorRed1">#FFC0BD</color>-->
 <!--    <color name="colorRed2">#FF6F67</color>-->

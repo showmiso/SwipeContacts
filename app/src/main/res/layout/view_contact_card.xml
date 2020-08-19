@@ -32,6 +32,15 @@
             />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_preview"
+            android:layout_width="@dimen/size_card_image"
+            android:layout_height="@dimen/size_card_image"
+            app:layout_constraintTop_toTopOf="@id/img_thumbnail"
+            app:layout_constraintStart_toStartOf="@id/img_thumbnail"
+            style="@style/cardTextPreview"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

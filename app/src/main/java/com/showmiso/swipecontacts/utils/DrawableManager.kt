@@ -46,8 +46,8 @@ class DrawableManager {
             R.color.colorPurpleDeep,
             R.color.colorYellow,
             R.color.colorYellowDeep,
-            R.color.colorOrange,
-            R.color.colorOrangeDeep,
+//            R.color.colorOrange,
+//            R.color.colorOrangeDeep,
             R.color.colorRed,
             R.color.colorRedDeep
         )

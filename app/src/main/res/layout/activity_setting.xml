@@ -67,7 +67,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="@dimen/margin_main"
                 android:text="@string/setting_deleted_title"
-                style="@style/MenuTitle"
+                style="@style/itemTitle"
                 />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -95,7 +95,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="@dimen/margin_main"
                 android:text="@string/setting_version"
-                style="@style/MenuTitle"
+                style="@style/itemTitle"
                 />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -106,7 +106,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="@dimen/margin_main"
-                style="@style/MenuSubTitle"
+                android:text="1.04"
+                style="@style/itemSubText"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -130,7 +131,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="@dimen/margin_main"
                 android:text="@string/setting_contact_us"
-                style="@style/MenuTitle"
+                style="@style/itemTitle"
                 />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -165,7 +166,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="@dimen/margin_main"
                 android:text="@string/license_title"
-                style="@style/MenuTitle"
+                style="@style/itemTitle"
                 />
 
             <androidx.appcompat.widget.AppCompatImageView

@@ -29,16 +29,13 @@ class TrashAdapter(
             }
 
             val randomColor = DrawableManager.randomColor()
-            if (contact.uri == null) {
-                itemView.img_thumbnail.background.setTint(
-                    itemView.context.getColor(randomColor[1])
-                )
-            } else {
-                Glide.with(itemView.context)
-                    .load(contact.uri)
-                    .transform(CircleCrop())
-                    .into(itemView.img_thumbnail)
-            }
+            itemView.img_thumbnail.background.setTint(
+                itemView.context.getColor(randomColor[0])
+            )
+            Glide.with(itemView.context)
+                .load(contact.uri)
+                .transform(CircleCrop())
+                .into(itemView.img_thumbnail)
 
             itemView.btn_restore.setOnClickListener(this@TrashViewHolder)
             itemView.btn_delete.setOnClickListener(this@TrashViewHolder)
