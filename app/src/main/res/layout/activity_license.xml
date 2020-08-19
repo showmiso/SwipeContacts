@@ -66,7 +66,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="@dimen/margin_main"
+                    android:layout_marginStart="@dimen/margin_common"
                     android:text="@string/license_1"
                     style="@style/itemTitle"
                     />
@@ -78,7 +78,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="@dimen/margin_main"
+                    android:layout_marginEnd="@dimen/margin_common"
                     android:background="@drawable/bg_selector_into"
                     android:button="@android:color/transparent"
                     android:backgroundTint="@color/colorGray"
@@ -108,8 +108,8 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:paddingStart="@dimen/margin_main"
-                    android:paddingEnd="@dimen/margin_main"
+                    android:paddingStart="@dimen/margin_common"
+                    android:paddingEnd="@dimen/margin_common"
                     style="@style/itemSubText"
                     />
 
@@ -128,7 +128,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="@dimen/margin_main"
+                    android:layout_marginStart="@dimen/margin_common"
                     android:text="@string/license_2"
                     style="@style/itemTitle"
                     />
@@ -140,7 +140,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="@dimen/margin_main"
+                    android:layout_marginEnd="@dimen/margin_common"
                     android:background="@drawable/bg_selector_into"
                     android:button="@android:color/transparent"
                     android:backgroundTint="@color/colorGray"
@@ -169,9 +169,9 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:paddingStart="@dimen/margin_main"
-                    android:paddingEnd="@dimen/margin_main"
-                    android:layout_marginBottom="@dimen/margin_main"
+                    android:paddingStart="@dimen/margin_common"
+                    android:paddingEnd="@dimen/margin_common"
+                    android:layout_marginBottom="@dimen/margin_common"
                     style="@style/itemSubText"
                     />
 

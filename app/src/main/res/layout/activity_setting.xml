@@ -65,7 +65,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="@dimen/margin_main"
+                android:layout_marginStart="@dimen/margin_common"
                 android:text="@string/setting_deleted_title"
                 style="@style/itemTitle"
                 />
@@ -77,7 +77,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="@dimen/margin_main"
+                android:layout_marginEnd="@dimen/margin_common"
                 style="@style/itemTitle"
                 />
 
@@ -93,7 +93,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="@dimen/margin_main"
+                android:layout_marginStart="@dimen/margin_common"
                 android:text="@string/setting_version"
                 style="@style/itemTitle"
                 />
@@ -105,7 +105,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="@dimen/margin_main"
+                android:layout_marginEnd="@dimen/margin_common"
                 android:text="1.04"
                 style="@style/itemSubText"
                 />
@@ -129,7 +129,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="@dimen/margin_main"
+                android:layout_marginStart="@dimen/margin_common"
                 android:text="@string/setting_contact_us"
                 style="@style/itemTitle"
                 />
@@ -140,7 +140,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="@dimen/margin_main"
+                android:layout_marginEnd="@dimen/margin_common"
                 android:src="@drawable/ic_into"
                 android:tint="@color/colorGray"
                 />
@@ -164,7 +164,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="@dimen/margin_main"
+                android:layout_marginStart="@dimen/margin_common"
                 android:text="@string/license_title"
                 style="@style/itemTitle"
                 />
@@ -175,7 +175,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="@dimen/margin_main"
+                android:layout_marginEnd="@dimen/margin_common"
                 android:src="@drawable/ic_into"
                 android:tint="@color/colorGray"
                 />

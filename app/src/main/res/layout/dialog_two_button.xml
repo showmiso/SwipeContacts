@@ -17,7 +17,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_title"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_dialog_button"
+            android:layout_height="@dimen/height_button_bottom"
             app:layout_constraintTop_toTopOf="parent"
             android:text="@string/trash_delete_all"
             style="@style/dialogTitle"

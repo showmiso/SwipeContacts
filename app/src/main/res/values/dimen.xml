@@ -11,7 +11,7 @@
 
     <dimen name="radius_main_card">15dp</dimen>
 
-    <dimen name="margin_main">26dp</dimen>
+    <dimen name="margin_common">26dp</dimen>
     <dimen name="margin_card_outline">26dp</dimen>
     <dimen name="margin_card_inline">16dp</dimen>
     <dimen name="margin_item">16dp</dimen>
@@ -21,13 +21,10 @@
     <dimen name="height_button_bottom">60dp</dimen>
     <dimen name="height_card">320dp</dimen>
     <dimen name="height_dialog_message">110dp</dimen>
-    <dimen name="height_dialog_button">60dp</dimen>
-
     <dimen name="height_sub_title">75dp</dimen>
 
     <dimen name="width_item_button">100dp</dimen>
 
     <dimen name="elevation_main">10dp</dimen>
-
 
 </resources>

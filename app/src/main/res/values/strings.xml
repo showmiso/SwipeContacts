@@ -28,6 +28,9 @@
     <string name="on_boarding_message_1">Swipe Left Side !\nContact Go Trash !</string>
     <string name="on_boarding_message_2">Swipe Right Means Skip this CARD !</string>
     <string name="on_boarding_message_3">It\'s OK !\nYou can delete or recover the card from the trash.</string>
+    <string name="on_boarding_skip" translatable="false">SKIP</string>
+    <string name="on_boarding_next" translatable="false">NEXT</string>
+    <string name="on_boarding_start" translatable="false">START</string>
 
     <string name="test_name" translatable="false">김정문</string>
     <string name="test_name_long" translatable="false">#bnk투자증권 하태욱 대리 / 김정문 과장 친구</string>
