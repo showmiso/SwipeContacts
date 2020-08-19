@@ -5,8 +5,8 @@
     <string name="contact_email">이메일</string>
     <string name="contact_email_default">이메일 없음</string>
     <string name="main_save">저장</string>
-    <string name="main_delete">삭제</string>
-    <string name="main_restore">복구</string>
+    <string name="main_delete">삭제하기</string>
+    <string name="main_restore">되돌리기</string>
     <string name="main_try_again">다시 정리하기</string>
     <string name="trash_title">휴지통</string>
     <string name="trash_delete_all">모두 삭제</string>

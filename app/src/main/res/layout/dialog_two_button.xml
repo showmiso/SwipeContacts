@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/colorWhite">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_title"
@@ -33,32 +38,37 @@
             android:gravity="center_vertical"
             />
 
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/btn_cancel"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/height_button_bottom"
-            app:layout_constraintStart_toStartOf="parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/txt_message"
-            app:layout_constraintEnd_toStartOf="@id/btn_ok"
-            android:text="@string/dialog_cancel"
-            style="@style/dialogCancel"
-            />
+            android:layout_marginTop="15dp"
+            >
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/btn_cancel"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height_button_bottom"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btn_ok"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@string/dialog_cancel"
+                style="@style/dialogCancel"
+                />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/btn_ok"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/height_button_bottom"
-            app:layout_constraintTop_toBottomOf="@id/txt_message"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btn_cancel"
-            android:background="@color/colorRed"
-            android:text="@string/dialog_ok"
-            style="@style/dialogOk"
-            />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/btn_ok"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height_button_bottom"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_cancel"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@color/colorRed"
+                android:text="@string/dialog_ok"
+                style="@style/dialogOk"
+                />
 
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

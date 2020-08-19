@@ -19,7 +19,7 @@ class TwoButtonDialogFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return LayoutInflater.from(context).inflate(R.layout.dialog_two_button, container, false)
+        return inflater.inflate(R.layout.dialog_two_button, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,7 +30,9 @@ class TwoButtonDialogFragment(
         if (strMessage.isNotEmpty()) {
             txt_message.text = strMessage
         }
-        btn_cancel.setOnClickListener { dismiss() }
+        btn_cancel.setOnClickListener {
+            dismiss()
+        }
         btn_ok.setOnClickListener {
             listener.clickOk()
             dismiss()
