@@ -10,8 +10,8 @@ android {
         applicationId "com.showmiso.swipecontacts"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 4
-        versionName "1.14"
+        versionCode 6
+        versionName "1.06"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
