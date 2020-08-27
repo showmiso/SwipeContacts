@@ -32,9 +32,9 @@
     <string name="on_boarding_next" translatable="false">NEXT</string>
     <string name="on_boarding_start" translatable="false">START</string>
 
-    <string name="test_name" translatable="false">김정문</string>
+    <string name="test_name" translatable="false">박미소</string>
     <string name="test_name_long" translatable="false">#bnk투자증권 하태욱 대리 / 김정문 과장 친구</string>
-    <string name="test_phone" translatable="false">010–5550–8540</string>
+    <string name="test_phone" translatable="false">010–1234–1234</string>
     <string name="test_email" translatable="false">test13254@gmail.com</string>
 
     <string name="license_title">OPENSOURCE LICENSE</string>

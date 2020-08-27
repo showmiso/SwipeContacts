@@ -1,6 +1,7 @@
 package com.showmiso.swipecontacts
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -53,6 +54,17 @@ class SettingActivity : AppCompatActivity() {
             }
             R.id.layout_license -> {
                 startActivity(Intent(this, LicenseActivity::class.java))
+            }
+            R.id.layout_contact_us -> {
+                val appPackageName = "com.showmiso.swipecontacts"
+                val intent = Intent(Intent.ACTION_VIEW)
+                try {
+                    intent.data = Uri.parse("market://detail?id=$appPackageName")
+                    startActivity(intent)
+                } catch (exp: android.content.ActivityNotFoundException) {
+                    intent.data = Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
+                    startActivity(intent)
+                }
             }
         }
     }

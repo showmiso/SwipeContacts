@@ -50,7 +50,7 @@
             app:layout_constraintBottom_toBottomOf="@id/img_thumbnail"
             android:layout_marginStart="@dimen/margin_card_inline"
             android:layout_marginEnd="@dimen/margin_card_outline"
-            android:text="@string/test_name_long"
+            android:text="@string/test_name"
             style="@style/cardTitle"
             android:maxLines="2"
             android:ellipsize="end"
@@ -103,6 +103,7 @@
             style="@style/cardSubText"
             android:maxLines="1"
             android:ellipsize="end"
+            android:text="@string/test_email"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
