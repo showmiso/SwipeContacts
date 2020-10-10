@@ -13,23 +13,15 @@ class DrawableManager {
         private var pastNumber: Int = 0
 
         fun changeDrawableSolidColor(context: Context, drawableId: Int): Drawable {
-            val target = context.getDrawable(drawableId)
-            val colors =
-                randomColor()
-
-//            if (target is ShapeDrawable) {
+            val target = ContextCompat.getDrawable(context, drawableId)
+            val colors = randomColor()
             val shapeDrawable: ShapeDrawable = target as ShapeDrawable
             shapeDrawable.paint.color = ContextCompat.getColor(context, colors[0])
             return shapeDrawable
-//            } else if (target is ColorDrawable) {
-//                val colorDrawable: ColorDrawable = target
-//                colorDrawable.color = ContextCompat.getColor(context, colors[0])
-//                return colorDrawable
-//            }
         }
 
         fun randomColor(): Array<Int> {
-            var randomNumber = 0
+            var randomNumber: Int
             do {
                 randomNumber = Random.nextInt(colorSet.size / 2) * 2
             } while (pastNumber == randomNumber)

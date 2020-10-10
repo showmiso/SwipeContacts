@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.showmiso.swipecontacts.ContactAdapter
 import com.showmiso.swipecontacts.model.Contact
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Function3
@@ -31,7 +32,8 @@ class ContactPresenter(
 
     fun deleteContact(contact: Contact) {
         val id = contact.id
-        Observable.just(
+
+        Single.just(
             cr.query(
                 ContactsContract.Contacts.CONTENT_URI,
                 null,
@@ -64,7 +66,7 @@ class ContactPresenter(
         for (contact in contactList) {
             strList.add(contact.id)
         }
-        Observable.just(
+        Single.just(
             cr.query(
                 ContactsContract.Contacts.CONTENT_URI,
                 null,

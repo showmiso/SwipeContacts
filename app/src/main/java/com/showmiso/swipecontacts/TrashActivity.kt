@@ -3,6 +3,7 @@ package com.showmiso.swipecontacts
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.showmiso.swipecontacts.dialog.TwoButtonDialogFragment
@@ -78,6 +79,7 @@ class TrashActivity : AppCompatActivity(), TrashAdapter.OnItemClickListener {
     override fun onClickItem(contact: Contact, layoutId: Int) {
         if (layoutId == R.id.btn_delete) {
             contactPresenter.deleteContact(contact)
+            Toast.makeText(this, "연락처 ${contact.name} 이(가) 삭제되었습니다.", Toast.LENGTH_SHORT).show()
         }
         deleteList.remove(contact)
     }

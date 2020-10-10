@@ -2,17 +2,6 @@ package com.showmiso.swipecontacts.model
 
 import android.net.Uri
 
-//data class Contact(
-//    val id: String,
-//    val name: String,
-//    val hasPhone: Boolean,
-//    var phone: String = "",
-//    var email: String? = "",
-//    var uri: Uri? = null,
-//    val deleted: Boolean = false
-//) {
-//}
-
 class Contact {
     var id: String = ""
     var name: String = ""

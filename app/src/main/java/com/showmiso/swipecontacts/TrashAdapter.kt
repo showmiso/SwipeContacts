@@ -39,7 +39,7 @@ class TrashAdapter(
                 .into(itemView.img_thumbnail)
 
             itemView.btn_restore.setOnClickListener(this@TrashViewHolder)
-//            itemView.btn_delete.setOnClickListener(this@TrashViewHolder)
+            itemView.btn_delete.setOnClickListener(this@TrashViewHolder)
         }
 
         override fun onClick(v: View) {
@@ -49,7 +49,6 @@ class TrashAdapter(
             notifyItemRemoved(adapterPosition)
             // 연락처에서 삭제
             listener.onClickItem(contact, v.id)
-
         }
     }
 

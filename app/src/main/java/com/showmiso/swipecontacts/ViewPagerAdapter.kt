@@ -13,10 +13,8 @@ class ViewPagerAdapter(
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val view: View = LayoutInflater.from(context).inflate(R.layout.layout_view_pager, container, false)
-
         return view
     }
-
 
     override fun getCount(): Int {
         return pageCount
