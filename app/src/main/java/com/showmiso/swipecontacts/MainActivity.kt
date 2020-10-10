@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
 import android.view.View
 import android.view.animation.AccelerateInterpolator
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
             this
         )
     }
+    private var lastClickTime = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,15 +44,20 @@ class MainActivity : AppCompatActivity() {
         card_view.layoutManager = manager
         card_view.adapter = contactAdapter
 
-        btn_setting.setOnClickListener(onClickListener)
-        btn_delete.setOnClickListener(onClickListener)
+        btn_setting.setOnClickListener(onPreventDoubleClickListener)
+        btn_delete.setOnClickListener(onPreventDoubleClickListener)
         btn_skip.setOnClickListener(onClickListener)
         btn_restore.setOnClickListener(onClickListener)
         btn_trash.setOnClickListener(onClickListener)
         btn_try_again.setOnClickListener(onClickListener)
     }
 
-    private val onClickListener = View.OnClickListener {
+    private val onPreventDoubleClickListener = View.OnClickListener {
+        if (SystemClock.elapsedRealtime() - lastClickTime < 1000) {
+            return@OnClickListener
+        }
+        lastClickTime = SystemClock.elapsedRealtime()
+
         when (it.id) {
             R.id.btn_setting -> {
                 startActivity(Intent(this@MainActivity, SettingActivity::class.java))
@@ -64,6 +71,11 @@ class MainActivity : AppCompatActivity() {
                 manager.setSwipeAnimationSetting(setting)
                 card_view.swipe()
             }
+        }
+    }
+
+    private val onClickListener = View.OnClickListener {
+        when (it.id) {
             R.id.btn_skip -> {
                 val setting = SwipeAnimationSetting.Builder()
                     .setDirection(Direction.Right)
