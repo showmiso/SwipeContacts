@@ -10,7 +10,7 @@ import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
-import com.showmiso.swipecontacts.presenter.ContactPresenter
+import com.showmiso.swipecontacts.manager.ContactManager
 import com.showmiso.swipecontacts.utils.Constants
 import com.yuyakaido.android.cardstackview.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     private val manager by lazy { CardStackLayoutManager(this, onCardStackListener) }
     private var skipCount: Int = 0
     private val contactPresenter by lazy {
-        ContactPresenter(
+        ContactManager(
             this
         )
     }

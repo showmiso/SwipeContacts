@@ -1,4 +1,4 @@
-package com.showmiso.swipecontacts.presenter
+package com.showmiso.swipecontacts.manager
 
 import android.content.ContentResolver
 import android.content.ContentUris
@@ -9,7 +9,6 @@ import android.util.Log
 import android.widget.Toast
 import com.showmiso.swipecontacts.ContactAdapter
 import com.showmiso.swipecontacts.model.Contact
-import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -17,7 +16,7 @@ import io.reactivex.functions.Function3
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 
-class ContactPresenter(
+class ContactManager(
     private val context: Context
 ) : Presenter {
     private val cr: ContentResolver = context.contentResolver
@@ -32,7 +31,6 @@ class ContactPresenter(
 
     fun deleteContact(contact: Contact) {
         val id = contact.id
-
         Single.just(
             cr.query(
                 ContactsContract.Contacts.CONTENT_URI,
@@ -54,9 +52,9 @@ class ContactPresenter(
                 cursor.close()
             }
             .subscribeOn(Schedulers.io())
-            .subscribe( {}, {
-                    Log.d("deleteContact", "Failed : " + it.localizedMessage)
-                }
+            .subscribe({}, {
+                Log.e("deleteContact", "Failed ", it)
+            }
             )
             .addTo(disposables)
     }
@@ -78,7 +76,8 @@ class ContactPresenter(
             .map { cursor ->
                 cursor.moveToFirst()
                 do {
-                    val id = cursor.getString(cursor.getColumnIndex(ContactsContract.PhoneLookup._ID))
+                    val id =
+                        cursor.getString(cursor.getColumnIndex(ContactsContract.PhoneLookup._ID))
                     if (strList.contains(id)) {
                         val lookupKey =
                             cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY))
@@ -96,7 +95,7 @@ class ContactPresenter(
                 {
                     Log.d("deleteContactList", "Success")
                 }, {
-                    Log.d("deleteContactList", "Failed : " + it.localizedMessage)
+                    Log.e("deleteContactList", "Fails", it)
                 }
             )
             .addTo(disposables)
@@ -109,20 +108,20 @@ class ContactPresenter(
                 contactAdapter.addList(it)
                 Log.d("getContactAll", "contactAdapter SIZE : ${contactAdapter.itemCount}")
             }
-            .subscribe({}, {
-                Log.d("Failed", "ERROR " + it.localizedMessage)
-            }, {
+            .subscribe({
                 Toast.makeText(
                     context,
                     "${contactAdapter.itemCount} 개의 연락처를 가져왔습니다.",
                     Toast.LENGTH_SHORT
                 ).show()
+            }, {
+                Log.e("ContactManager", "Fails", it)
             }
             )
             .addTo(disposables)
     }
 
-    private fun getContactObservable(contactAdapter: ContactAdapter): Observable<ArrayList<Contact>> {
+    private fun getContactObservable(contactAdapter: ContactAdapter): Single<ArrayList<Contact>> {
         val displayName = ContactsContract.Contacts.DISPLAY_NAME_PRIMARY
         val filter = "$displayName NOT LIKE '%@%'"
         val order = String.format("%1\$s COLLATE NOCASE", displayName)
@@ -132,7 +131,7 @@ class ContactPresenter(
             ContactsContract.Contacts.HAS_PHONE_NUMBER
         )
         val contactsList = ArrayList<Contact>()
-        return Observable.just(
+        return Single.just(
             cr.query(
                 ContactsContract.Contacts.CONTENT_URI,
                 projection,
@@ -173,9 +172,9 @@ class ContactPresenter(
             .subscribeOn(Schedulers.io())
     }
 
-    private fun getContactOfPhoneEmailUriObservable(contact: Contact): Observable<Contact> {
+    private fun getContactOfPhoneEmailUriObservable(contact: Contact): Single<Contact> {
         val id = contact.id
-        val phoneCursorObservable = Observable.just(
+        val phoneCursor = Single.just(
             cr.query(
                 ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
                 null,
@@ -196,7 +195,7 @@ class ContactPresenter(
             }
             .subscribeOn(Schedulers.io())
 
-        val emailCursorObservable = Observable.just(
+        val emailCursor = Single.just(
             cr.query(
                 ContactsContract.CommonDataKinds.Email.CONTENT_URI,
                 null,
@@ -217,7 +216,7 @@ class ContactPresenter(
             }
             .subscribeOn(Schedulers.io())
 
-        val uriCursorObservable: Observable<Uri?> = Observable.just(
+        val uriCursor: Single<Uri?> = Single.just(
             cr.query(
                 ContactsContract.Data.CONTENT_URI,
                 null,
@@ -253,10 +252,10 @@ class ContactPresenter(
                 contact
             }
 
-        return Observable.zip(
-            phoneCursorObservable,
-            emailCursorObservable,
-            uriCursorObservable,
+        return Single.zip(
+            phoneCursor,
+            emailCursor,
+            uriCursor,
             resultFunction3
         )
             .subscribeOn(Schedulers.io())

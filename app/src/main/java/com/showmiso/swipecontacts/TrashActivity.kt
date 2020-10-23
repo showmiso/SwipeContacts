@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.showmiso.swipecontacts.dialog.TwoButtonDialogFragment
 import com.showmiso.swipecontacts.model.Contact
-import com.showmiso.swipecontacts.presenter.ContactPresenter
+import com.showmiso.swipecontacts.manager.ContactManager
 import com.showmiso.swipecontacts.utils.AdMobManager
 import kotlinx.android.synthetic.main.activity_trash.*
 
@@ -18,7 +18,7 @@ class TrashActivity : AppCompatActivity(), TrashAdapter.OnItemClickListener {
     }
 
     private val contactPresenter by lazy {
-        ContactPresenter(
+        ContactManager(
             this
         )
     }
